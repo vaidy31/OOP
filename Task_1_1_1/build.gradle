@@ -22,6 +22,6 @@ test {
 
 jacocoTestReport {
     reports {
-        xnl.required = true
+        xml.required = true
     }
 }
