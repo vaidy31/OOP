@@ -1,54 +1,57 @@
 package ru.nsu.mzaugolnikov.task111;
 
 /**
- * сортировка кучей (пирамидальная сортировка (минадльная хаха))
- * сложность  O(n) buildMaxheap * O(log n) heapify
+ * Сортировка кучей (пирамидальная сортировка).
+ * Сложность O(n) buildMaxheap * O(log n) heapify.
  */
 public class task111 {
     /**
-     * класс для выполнения условия родитель > ребёнок
+     * Класс для выполнения условия родитель > ребёнок.
+     *
      * @param obj массив -> в кучу
      * @param n количество элементов в массиве
      * @param i -ый элемент, который рассматриваем
      */
-    private static void heapify(int[] obj, int n, int i) {
+    private static void heapify(final int[] obj, final int n, final int i) {
         int largest = i;
-        int leftel = i * 2 + 1;
-        int rightel = i * 2 + 2;
+        int leftEl = i * 2 + 1;
+        int rightEl = i * 2 + 2;
 
-        if (leftel < n && obj[leftel] > obj[largest]) { // если ребенок больше родителя
-            largest = leftel;
+        if (leftEl < n && obj[leftEl] > obj[largest]) { // если ребенок больше родителя
+            largest = leftEl;
         }
 
-        if (rightel < n && obj[rightel] > obj[largest]) {
-            largest = rightel;
+        if (rightEl < n && obj[rightEl] > obj[largest]) {
+            largest = rightEl;
         }
 
-        if (largest != i){ // рекурсивный вызов (swap)
-            int temp_el = obj[i];
+        if (largest != i) { // рекурсивный вызов (swap)
+            int tempEl = obj[i];
             obj[i] = obj[largest];
-            obj[largest] = temp_el;
+            obj[largest] = tempEl;
             heapify(obj, n, largest);
         }
     }
 
     /**
-     * строит кучу, беря только узлы, а не листья
+     * Строит кучу, беря только узлы, а не листья.
+     *
      * @param obj массив для построения кучи
      * @param n количество элементов в массиве
      */
-    private static void buildMaxHeap(int[] obj, int n) {
-        for (int i = n / 2 - 1; i >= 0; i--){
+    private static void buildMaxHeap(final int[] obj, final int n) {
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(obj, n, i);
         }
     }
 
     /**
-     * главный метод для сортировки, изменяет исходный массив
+     * Главный метод для сортировки, изменяет исходный массив.
+     *
      * @param obj исходный массив для сортировки
      * @return возвращает отсортированный массив
      */
-    public static int[] heapsort(int[] obj) {
+    public static int[] heapsort(final int[] obj) {
         int n = obj.length;
         buildMaxHeap(obj, n);
 
@@ -63,9 +66,10 @@ public class task111 {
     }
 
     /**
-     * main
-     * @param args 0
+     * Main method.
+     *
+     * @param args command line arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
     }
 }
