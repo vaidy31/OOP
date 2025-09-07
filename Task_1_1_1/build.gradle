@@ -1,9 +1,8 @@
 plugins {
     id 'java'
-    id 'jacoco'
 }
 
-group = 'ru.nsu.mzaugolnikov.Task_1_1_1'
+group = 'ru.nsu.mzaugolnikov.task111'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -18,10 +17,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-jacocoTestReport {
-    reports {
-        xml.required = true
-    }
 }
