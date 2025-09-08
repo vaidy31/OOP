@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for Task111.
  */
-class SortTests {
+class SortTest {
     @Test
     void testDefault() {
         int[] array = new int[]{1, 3, 2};
