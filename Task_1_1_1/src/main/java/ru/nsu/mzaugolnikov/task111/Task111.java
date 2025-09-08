@@ -4,7 +4,7 @@ package ru.nsu.mzaugolnikov.task111;
  * Сортировка кучей (пирамидальная сортировка).
  * Сложность O(n) buildMaxheap * O(log n) heapify.
  */
-public class task111 {
+public class Task111 {
     /**
      * Класс для выполнения условия родитель > ребёнок.
      *
