@@ -48,10 +48,9 @@ public class Task111 {
     /**
      * Главный метод для сортировки, изменяет исходный массив.
      *
-     * @param obj исходный массив для сортировки
-     * @return возвращает отсортированный массив
+     * @param obj I/O массив для сортировки
      */
-    public static int[] heapsort(final int[] obj) {
+    public static void heapsort(int[] obj) {
         int n = obj.length;
         buildMaxHeap(obj, n);
 
@@ -62,7 +61,6 @@ public class Task111 {
 
             heapify(obj, i, 0);
         }
-        return obj;
     }
 
     /**
