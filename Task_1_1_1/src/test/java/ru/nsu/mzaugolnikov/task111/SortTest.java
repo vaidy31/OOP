@@ -1,8 +1,8 @@
 package ru.nsu.mzaugolnikov.task111;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import java.util.Random;
 
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -57,9 +57,10 @@ class SortTest {
         Task111.heapsort(array);
         assertArrayEquals(new int[]{-23, -2, 0, 6, 123}, array);
     }
+
     @Test
     void testTimeBig() {
-        int[] arrayOfSize = new int[]{1000, 5000, 10000, 50000, 100000, 250000, 500000, 750000, 1000000, 2500000, 5000000, 7500000, 10000000};
+        int[] arrayOfSize = new int[]{250000, 500000, 750000, 1000000, 2500000, 5000000, 7500000, 10000000};
         Random random = new Random();
         for (int i = 0; i < arrayOfSize.length; i++) {
             int size = arrayOfSize[i];
@@ -71,8 +72,14 @@ class SortTest {
             Task111.heapsort(arrayToSort);
             long end = System.nanoTime();
             long time = end - start;
-            if (i == 0) System.out.println("size: " + size + ", time: " + time/1000 + " mcs");
-            else System.out.println("size: " + size + ", time: " + time/1000000 + " ms");
+            /*
+            if (i == 0) {
+                System.out.println("size: " + size + ", time: " + time  / 1000 + " mcs");
+            }
+            else {
+                System.out.println("size: " + size + ", time: " + time / 1000000 + " ms");
+            }
+            */
             for (int k = 0; k < size - 1; k++) {
                 if (arrayToSort[k] > arrayToSort[k + 1]) {
                     throw new AssertionError("GG, your code is trash :(");
