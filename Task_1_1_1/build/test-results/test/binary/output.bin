@@ -1,0 +1,13 @@
+size: 1000, time: 3363 mcs
+size: 5000, time: 1 ms
+size: 10000, time: 4 ms
+size: 50000, time: 21 ms
+size: 100000, time: 20 ms
+size: 250000, time: 49 ms
+size: 500000, time: 101 ms
+size: 750000, time: 151 ms
+size: 1000000, time: 216 ms
+size: 2500000, time: 712 ms
+size: 5000000, time: 1669 ms
+size: 7500000, time: 3254 ms
+size: 10000000, time: 3736 ms
