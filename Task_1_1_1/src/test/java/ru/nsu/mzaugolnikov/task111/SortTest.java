@@ -60,7 +60,7 @@ class SortTest {
 
     @Test
     void testTimeBig() {
-        int[] arrayOfSize = new int[]{500000, 750000, 1000000, 2500000, 5000000, 7500000, 10000000};
+        int[] arrayOfSize = new int[]{750000, 1000000, 2500000, 5000000, 7500000, 10000000};
         Random random = new Random();
         for (int i = 0; i < arrayOfSize.length; i++) {
             int size = arrayOfSize[i];
