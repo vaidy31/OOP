@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.mzaugolnikov.task111.SortTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-09-10T17:12:14.796Z" hostname="VAIDY31-LAPTOP" time="10.277">
+  <properties/>
+  <testcase name="testTimeBig()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="10.247"/>
+  <testcase name="testEmpty()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.014"/>
+  <testcase name="testSame()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.002"/>
+  <testcase name="testAllSorted()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.002"/>
+  <testcase name="testReversed()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.001"/>
+  <testcase name="testDefault()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.001"/>
+  <testcase name="testDefault2()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.001"/>
+  <testcase name="testNegative()" classname="ru.nsu.mzaugolnikov.task111.SortTest" time="0.001"/>
+  <system-out><![CDATA[size: 1000, time: 3363 mcs
+size: 5000, time: 1 ms
+size: 10000, time: 4 ms
+size: 50000, time: 21 ms
+size: 100000, time: 20 ms
+size: 250000, time: 49 ms
+size: 500000, time: 101 ms
+size: 750000, time: 151 ms
+size: 1000000, time: 216 ms
+size: 2500000, time: 712 ms
+size: 5000000, time: 1669 ms
+size: 7500000, time: 3254 ms
+size: 10000000, time: 3736 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
