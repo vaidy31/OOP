@@ -3,6 +3,7 @@ package ru.nsu.mzaugolnikov.task222;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,5 +50,30 @@ class DeckTest {
             assertNotNull(lastCard);
         }
         assertNull(deck.dealCard());
+    }
+
+    @Test
+    void testShuffleChangesOrder() {
+        Deck deck1 = new Deck();
+        Deck deck2 = new Deck();
+        deck2.shuffle();
+        assertFalse(deck1.dealCard().equals(deck2.dealCard())); // Requires getCards()
+    }
+
+    @Test
+    void testReset() {
+        Deck deck = new Deck();
+        deck.dealCard(); // Удаляем одну карту
+        int cardsBeforeReset = 0;
+        while (deck.dealCard() != null) {
+            cardsBeforeReset++;
+        }
+        assertEquals(51, cardsBeforeReset, "После удаления должно остаться 51");
+        deck.reset();
+        int cardsAfterReset = 0;
+        while (deck.dealCard() != null) {
+            cardsAfterReset++;
+        }
+        assertEquals(52, cardsAfterReset, "После reset должно быть 52 карты");
     }
 }
