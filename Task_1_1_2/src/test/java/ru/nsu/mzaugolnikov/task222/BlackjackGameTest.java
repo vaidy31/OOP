@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -166,7 +167,7 @@ class BlackjackGameTest {
 
     @Test
     void testPlayerTurnBusts() {
-        String input = "1\n1\n1\n"; // берет много карт
+        String input = "1\n1\n1\n0\n0\n"; // берет много карт
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
@@ -178,49 +179,19 @@ class BlackjackGameTest {
         assertTrue(output.contains("перебрали"));
     }
 
-    @Test
-    void testStartGame() {
-        // просто запускаем игру с блэкдж. делаем сущность
-        BlackjackGame gameWithFixedDeck = new BlackjackGame() {
-            @Override
-            public void startGame() {
-                System.out.println("Добро пожаловать в Блэкджек!");
-                java.util.Scanner scanner = new java.util.Scanner(System.in);
-                int[] scores = {0, 0};
-                int round = 1;
 
-                // делаем свою колоду
-                Deck fixedDeck = new Deck() {
-                    private int dealCount = 0;
-                    private Cards.Card[] cards = {
-                            new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS),
-                            new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS),
-                            new Cards.Card(Cards.Rank.TEN, Cards.Suit.CLUBS),
-                            new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS)
-                    };
-                    @Override
-                    public Cards.Card dealCard() {
-                        return cards[dealCount++ % cards.length];
-                    }
-                    @Override
-                    public void shuffle() {} // отключаем перемешивание
-                };
-                Player player = new Player("Игрок");
-                Dealer dealer = new Dealer("Дилер");
-                for (int i = 0; i < 2; i++) {
-                    player.addCard(fixedDeck.dealCard());
-                    dealer.addCard(fixedDeck.dealCard());
-                }
-                whoIsWinner(player, dealer, scores);
-                System.out.println("Игра завершена. Финальный счет: Игрок " + scores[0]
-                        + " : Дилер " + scores[1]);
-            }
-        };
-        String input = "0\n"; // прерываем игру
-        System.setIn(new ByteArrayInputStream(input.getBytes())); // точно прерываем
-        gameWithFixedDeck.startGame();
+    @Test
+    void testStartGameMultipleRounds() {
+        // Тест нескольких раундов
+        String input = "0\n1\n0\n0\n"; // Раунд 1: стоять, продолжить; Раунд 2: стоять, выйти
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        game.startGame();
+
         String output = outputStream.toString();
-        assertTrue(output.contains("Добро пожаловать в Блэкджек"));
-        assertTrue(output.contains("Игра завершена"));
+        assertTrue(output.contains("Раунд 1"));
+        assertTrue(output.contains("Раунд 2"));
+        assertTrue(output.contains("Финальный счет"));
     }
+
 }
