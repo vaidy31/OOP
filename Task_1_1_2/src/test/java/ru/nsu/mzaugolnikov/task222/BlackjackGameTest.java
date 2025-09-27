@@ -182,10 +182,9 @@ class BlackjackGameTest {
 
 
     @Test
-    void testStartGameMultipleRounds() {
+    void testStartGameRound() {
         InputStream in = System.in;
-        // Добавьте достаточно данных для всех возможных запросов
-        String input = "1\n0\n"; // Избыточные данные
+        String input = "1\n0\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         game.startGame();
