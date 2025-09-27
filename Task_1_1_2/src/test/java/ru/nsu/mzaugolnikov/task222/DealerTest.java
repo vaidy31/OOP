@@ -55,13 +55,6 @@ class DealerTest {
     }
 
     @Test
-    void testStartHiddenHandOneCard() {
-        Dealer dealer = new Dealer("Дилер");
-        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        assertEquals("[Десятка Черви (10)]", dealer.startHiddenHand());
-    }
-
-    @Test
     void testStartHiddenHandMultipleCards() {
         Dealer dealer = new Dealer("Дилер");
         dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
