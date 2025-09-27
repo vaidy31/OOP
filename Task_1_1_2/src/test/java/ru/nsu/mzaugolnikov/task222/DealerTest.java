@@ -80,7 +80,7 @@ class DealerTest {
         assertEquals(0, dealer.getTotal());
     }
 
-    
+
     @Test
     void testShowAllHand() {
         Dealer dealer = new Dealer("Дилер");
