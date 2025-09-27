@@ -81,6 +81,7 @@ class BlackjackGameTest {
         assertEquals(0, scores[1]);
     }
 
+
     @Test
     void testDealerWins() {
         // Дилер выигрывает
@@ -120,11 +121,96 @@ class BlackjackGameTest {
     }
 
     @Test
+    void testDealerTurnBusts() {
+        Deck testDeck = new Deck() {
+            @Override
+            public Cards.Card dealCard() {
+                return new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS);
+            }
+        };
+
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SIX, Cards.Suit.CLUBS)); // 16
+        game.dealerTurn(dealer, testDeck);
+        String output = outputStream.toString();
+        assertTrue(output.contains("Дилер перебрал!"));
+    }
+
+    @Test
+    void testDealerTurnUnder17() {
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SIX, Cards.Suit.CLUBS)); // 16
+
+        game.dealerTurn(dealer, deck);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Ход дилера:"));
+        assertTrue(output.contains("Дилер открывает закрытую карту"));
+        assertTrue(output.contains("Дилер открывает карту"));
+        assertTrue(output.contains("Карты дилера:"));
+    }
+
+    @Test
+    void testDealerTurnOver17() {
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS)); // 17
+
+        game.dealerTurn(dealer, deck);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Ход дилера:"));
+        assertTrue(output.contains("Дилер открывает закрытую карту"));
+        assertTrue(output.contains("Карты дилера:"));
+        assertFalse(output.contains("Дилер открывает карту"));
+    }
+
+    @Test
     void testPlayerBusts() {
         player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS));
         player.addCard(new Cards.Card(Cards.Rank.QUEEN, Cards.Suit.CLUBS));
         player.addCard(new Cards.Card(Cards.Rank.TWO, Cards.Suit.DIAMONDS)); // 22
         assertTrue(player.isBusted());
+    }
+
+    @Test
+    void testPlayerTurnBusts() {
+        // Тест когда игрок перебирает
+        String input = "1\n1\n1\n"; // берет много карт
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Даем игроку карты с большим количеством очков
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.CLUBS));
+
+        game.playerTurn(player, dealer, deck);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Перебор"));
+    }
+
+    @Test
+    void testWhoIsWinnerScore() {
+        int[] scores = {2, 3};
+
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS)); // 19
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.SPADES));
+        dealer.addCard(new Cards.Card(Cards.Rank.EIGHT, Cards.Suit.DIAMONDS)); // 18
+
+        game.whoIsWinner(player, dealer, scores);
+        assertEquals(3, scores[0]); // +1
+        assertEquals(3, scores[1]);
+
+        Player player2 = new Player("Игрок");
+        Dealer dealer2 = new Dealer("Дилер");
+        player2.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        player2.addCard(new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS)); // 17
+        dealer2.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.SPADES));
+        dealer2.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.DIAMONDS)); // 19
+
+        game.whoIsWinner(player2, dealer2, scores);
+        assertEquals(3, scores[0]); //
+        assertEquals(4, scores[1]); // дилер +1
     }
 
 }
