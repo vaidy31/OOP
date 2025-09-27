@@ -162,8 +162,12 @@ public class BlackjackGame {
 
             // Спрашиваем, продолжать ли играть
             System.out.print("Хотите сыграть еще один раунд? (1 - да, 0 - нет): ");
-            int choice = scanner.nextInt();
-            continuePlaying = choice == 1;
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                continuePlaying = choice == 1;
+            } else {
+                continuePlaying = false; // если данных нет, выходим из цикла
+            }
             round++;
         }
 
