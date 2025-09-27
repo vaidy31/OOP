@@ -9,7 +9,7 @@ import ru.nsu.mzaugolnikov.task222.Cards.Card;
  */
 public abstract class Hand {
     private final ArrayList<Cards.Card> hand;
-
+    int basedScore = 21;
     /**
      * Конструктор руки. Создает пустую руку.
      */
@@ -43,7 +43,6 @@ public abstract class Hand {
                 aceCount++;
             }
         }
-        int basedScore = 21;
         while (total > basedScore && aceCount > 0) {
             total -= 10;
             aceCount--;
@@ -52,12 +51,12 @@ public abstract class Hand {
     }
 
     /**
-     * Перебор или нет (больше 21).
+     * Перебор или нет (больше basedscore).
      *
      * @return true/false
      */
     public boolean isBusted() {
-        return  getTotal() > 21;
+        return  getTotal() > basedScore;
     }
 
     /**
@@ -66,7 +65,7 @@ public abstract class Hand {
      * @return true/false
      */
     public boolean isBlackjack() {
-        return hand.size() == 2 && getTotal() == 21;
+        return hand.size() == 2 && getTotal() == basedScore;
     }
 
     /**
