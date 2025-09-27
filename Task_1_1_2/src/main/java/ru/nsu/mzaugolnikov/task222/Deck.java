@@ -9,6 +9,7 @@ import java.util.Collections;
  */
 public class Deck {
     private final ArrayList<Cards.Card> cards;
+
     /**
      * Конструктор колоды. Создает и перемешивает колоду из 52 карт.
      */

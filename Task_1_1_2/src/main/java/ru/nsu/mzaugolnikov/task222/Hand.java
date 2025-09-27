@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import ru.nsu.mzaugolnikov.task222.Cards.Card;
 
 /**
- * Абстрактный класс руки
- * Общая логика игрока для игрока и дилера
+ * Абстрактный класс руки.
+ * Общая логика игрока для игрока и дилера.
  */
 public abstract class Hand {
     private final ArrayList<Cards.Card> hand;
@@ -51,7 +51,7 @@ public abstract class Hand {
     }
 
     /**
-     * Перебор или нет (> 21)
+     * Перебор или нет (больше 21).
      *
      * @return true/false
      */
@@ -69,14 +69,14 @@ public abstract class Hand {
     }
 
     /**
-     * Очистка руки
+     * Очистка руки.
      */
     public void clear() {
         hand.clear();
     }
 
     /**
-     * Строковое представление карт в руке
+     * Строковое представление карт в руке.
      *
      * @param hideFstCard (для дилера) скрытие первой карты
      * @return строчка
@@ -94,7 +94,7 @@ public abstract class Hand {
                 sb.append(", ");
             }
         }
-        sb.append( "]");
+        sb.append("]");
         return sb.toString();
     }
 

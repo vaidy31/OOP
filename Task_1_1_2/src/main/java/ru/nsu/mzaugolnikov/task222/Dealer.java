@@ -2,13 +2,13 @@ package ru.nsu.mzaugolnikov.task222;
 
 /**
  * Класс для дилера.
- * Наследует Hand
+ * Наследует Hand.
  */
 public class Dealer extends Hand {
     private final String name;
 
     /**
-     * Конструктор дилера
+     * Конструктор дилера.
      *
      * @param name его имя лол
      */
@@ -24,12 +24,12 @@ public class Dealer extends Hand {
      * @return строка с картами дилера, где вторая карта скрыта
      */
     public String startHiddenHand() {
-        StringBuilder Sb = new StringBuilder("[");
+        StringBuilder sb = new StringBuilder("[");
         if (!getHand().isEmpty()) {
-            Sb.append(getHand().get(0).toString()).append(", <закрытая крата>");
+            sb.append(getHand().get(0).toString()).append(", <закрытая крата>");
         }
-        Sb.append("]");
-        return  Sb.toString();
+        sb.append("]");
+        return  sb.toString();
     }
 
     /**

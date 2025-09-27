@@ -2,13 +2,13 @@ package ru.nsu.mzaugolnikov.task222;
 
 /**
  * Класс, представляющий пользователя (игрока).
- * Наследует Hand
+ * Наследует Hand.
  */
-public class Player extends Hand{
+public class Player extends Hand {
     private final String name;
 
     /**
-     * Конструктор
+     * Конструктор.
      *
      * @param name имя игрока
      */
