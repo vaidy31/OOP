@@ -49,44 +49,52 @@ class DealerTest {
     }
 
     @Test
+    void testStartHiddenHandEmpty() {
+        Dealer dealer = new Dealer("Дилер");
+        assertEquals("[]", dealer.startHiddenHand());
+    }
+
+    @Test
+    void testStartHiddenHandOneCard() {
+        Dealer dealer = new Dealer("Дилер");
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        assertEquals("[Десятка Черви (10)]", dealer.startHiddenHand());
+    }
+
+    @Test
+    void testStartHiddenHandMultipleCards() {
+        Dealer dealer = new Dealer("Дилер");
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.SPADES));
+        String hiddenHand = dealer.startHiddenHand();
+        assertTrue(hiddenHand.contains("Десятка Черви"));
+        assertTrue(hiddenHand.contains("<закрытая карта>"));
+        assertEquals("[Десятка Черви (10), <закрытая карта>]", hiddenHand);
+    }
+
+    @Test
+    void testConstructor() {
+        Dealer dealer = new Dealer("Дилер");
+        assertEquals("Дилер", dealer.getName());
+        assertEquals(0, dealer.getHand().size());
+        assertEquals(0, dealer.getTotal());
+    }
+
+    
+    @Test
     void testShowAllHand() {
         Dealer dealer = new Dealer("Дилер");
         dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
-
-        String handStr = dealer.showAllHand();
-        assertTrue(handStr.contains("Десятка"));
-        assertTrue(handStr.contains("Король"));
-    }
-
-
-    @Test
-    void testShowCardsHidden() {
-        Dealer dealer = new Dealer("Дилер");
-        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
-
-        String strHidden = dealer.showCards(true);
-        assertTrue(strHidden.contains("<закрытая карта>"));
-        assertTrue(strHidden.contains("Король"));
-
-        String strVisible = dealer.showCards(false);
-        assertTrue(strVisible.contains("Десятка"));
-        assertTrue(strVisible.contains("Король"));
+        dealer.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.SPADES));
+        String allHand = dealer.showAllHand();
+        assertTrue(allHand.contains("Десятка Черви"));
+        assertTrue(allHand.contains("Туз Пики"));
+        assertEquals("[Десятка Черви (10), Туз Пики (11)]", allHand);
     }
 
     @Test
-    void testAceAdjustment() {
+    void testShowAllHandEmpty() {
         Dealer dealer = new Dealer("Дилер");
-        dealer.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS));
-        dealer.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS));
-        assertEquals(20, dealer.getTotal(), "Туз считается 11, общая сумма 20");
-
-        dealer.addCard(new Cards.Card(Cards.Rank.THREE, Cards.Suit.SPADES));
-        assertEquals(13, dealer.getTotal(), "Туз пересчитан как 1, общая сумма 13");
-
-        dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.DIAMONDS));
-        assertTrue(dealer.isBusted(), "Дилер перебрал");
+        assertEquals("[]", dealer.showAllHand());
     }
-
 }

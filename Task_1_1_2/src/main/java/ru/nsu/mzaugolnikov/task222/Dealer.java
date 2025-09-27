@@ -26,10 +26,13 @@ public class Dealer extends Hand {
     public String startHiddenHand() {
         StringBuilder sb = new StringBuilder("[");
         if (!getHand().isEmpty()) {
-            sb.append(getHand().get(0).toString()).append(", <закрытая крата>");
+            sb.append(getHand().get(0).toString());
+            if (getHand().size() > 1) {
+                sb.append(", <закрытая карта>");
+            }
         }
         sb.append("]");
-        return  sb.toString();
+        return sb.toString();
     }
 
     /**
@@ -39,5 +42,14 @@ public class Dealer extends Hand {
      */
     public String showAllHand() {
         return showCards(false);
+    }
+
+    /**
+     * Возвращает имя дилера.
+     *
+     * @return имя дилера
+     */
+    public String getName() {
+        return name;
     }
 }
