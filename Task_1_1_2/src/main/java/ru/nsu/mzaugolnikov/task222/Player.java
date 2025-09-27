@@ -1,4 +1,4 @@
-package ru.nsu.mzaugolnikov.task111;
+package ru.nsu.mzaugolnikov.task222;
 
 public class Player extends Hand{
     private final String name;

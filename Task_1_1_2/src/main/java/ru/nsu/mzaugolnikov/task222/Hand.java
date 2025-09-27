@@ -1,7 +1,7 @@
-package ru.nsu.mzaugolnikov.task111;
+package ru.nsu.mzaugolnikov.task222;
 
 import java.util.ArrayList;
-import ru.nsu.mzaugolnikov.task111.Cards.Card;
+import ru.nsu.mzaugolnikov.task222.Cards.Card;
 
 public abstract class Hand {
     private final ArrayList<Cards.Card> hand;

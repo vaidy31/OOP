@@ -1,4 +1,4 @@
-package ru.nsu.mzaugolnikov.task111;
+package ru.nsu.mzaugolnikov.task222;
 // Коля машкин не играет
 public class Cards {
     public enum Rank {

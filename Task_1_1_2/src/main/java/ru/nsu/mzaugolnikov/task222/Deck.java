@@ -1,4 +1,4 @@
-package ru.nsu.mzaugolnikov.task111;
+package ru.nsu.mzaugolnikov.task222;
 
 import java.util.ArrayList;
 import java.util.Collections;
