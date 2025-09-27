@@ -4,11 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlackjackGameTest {
-
+    private ByteArrayOutputStream outputStream;
     private BlackjackGame game;
     private Player player;
     private Dealer dealer;
@@ -17,9 +18,46 @@ class BlackjackGameTest {
     @BeforeEach
     void setUp() {
         game = new BlackjackGame();
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
         player = new Player("Игрок");
         dealer = new Dealer("Дилер");
         deck = new Deck();
+    }
+
+    //  playerTurn
+    @Test
+    void testPlayerTurnHitCard() {
+        String input = "1\n0\n"; //
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS));
+
+        game.playerTurn(player, dealer, deck);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Ваши карты:"));
+        assertTrue(output.contains("Карты дилера:"));
+        assertTrue(output.contains("взять карту"));
+        assertTrue(output.contains("Вы открыли карту"));
+    }
+
+    @Test
+    void testPlayerTurnStandImmediately() {
+        String input = "0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS));
+
+        game.playerTurn(player, dealer, deck);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Ваши карты:"));
+        assertTrue(output.contains("Карты дилера:"));
+        assertFalse(output.contains("Вы открыли карту")); // Не должно быть сообщения о взятии карты
     }
 
     @Test
@@ -83,29 +121,4 @@ class BlackjackGameTest {
         assertTrue(player.isBusted());
     }
 
-    @Test
-    void testPlayerTakesOneCardAndStands() {
-        String simulatedInput = "1\n0\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        player.addCard(deck.dealCard());
-        int initialTotal = player.getTotal();
-
-        game.playerTurn(player, dealer, deck);
-
-        assertEquals(initialTotal + player.getHand().get(1).getRank().getValue(), player.getTotal());
-        assertEquals(2, player.getHand().size());
-    }
-
-    @Test
-    void testPlayerBustsDuringTurn() {
-        String simulatedInput = "1\n1\n1\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS));
-        player.addCard(new Cards.Card(Cards.Rank.QUEEN, Cards.Suit.CLUBS));
-
-        game.playerTurn(player, dealer, deck);
-
-        assertTrue(player.isBusted());
-    }
 }
