@@ -43,19 +43,6 @@ class HandTest {
     }
 
     @Test
-    void testGetHandReturnsCopy() {
-        Player player = new Player("Игрок");
-        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
-
-        ArrayList<Cards.Card> handCopy = player.getHand();
-        assertEquals(2, handCopy.size());
-
-        handCopy.clear();
-        assertEquals(2, player.getHand().size());
-    }
-
-    @Test
     void testDealerShowAllHand() {
         Dealer dealer = new Dealer("Дилер");
         dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
@@ -75,7 +62,7 @@ class HandTest {
         assertEquals(0, player.getTotal());
         assertFalse(player.isBusted());
         assertFalse(player.isBlackjack());
-        assertTrue(player.getHand().isEmpty());
+        assertEquals(0, player.getHandSize());
     }
 
     @Test

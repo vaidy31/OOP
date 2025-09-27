@@ -113,7 +113,7 @@ public abstract class Hand {
      */
     public Cards.Card getCard(int index) {
         if (index < 0 || index >= hand.size()) {
-            return null; // Или можно выбросить исключение, если индекс некорректен
+            return null;
         }
         return hand.get(index);
     }
