@@ -2,6 +2,8 @@ package ru.nsu.mzaugolnikov.task222;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -29,6 +31,7 @@ class HandTest {
         assertTrue(player.isBusted()); //22
     }
 
+    @Test
     void testIsBlackjack() {
         Player player = new Player("Игрок");
         player.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS));
@@ -39,6 +42,20 @@ class HandTest {
         assertFalse(player.isBlackjack());
     }
 
+    @Test
+    void testGetHandReturnsCopy() {
+        Player player = new Player("Игрок");
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
+
+        ArrayList<Cards.Card> handCopy = player.getHand();
+        assertEquals(2, handCopy.size());
+
+        handCopy.clear();
+        assertEquals(2, player.getHand().size());
+    }
+
+    @Test
     void testDealerShowAllHand() {
         Dealer dealer = new Dealer("Дилер");
         dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
@@ -49,6 +66,7 @@ class HandTest {
         assertTrue(str.contains("Король"));
     }
 
+    @Test
     void testClearHand() {
         Player player = new Player("Игрок");
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
@@ -60,6 +78,7 @@ class HandTest {
         assertTrue(player.getHand().isEmpty());
     }
 
+    @Test
     void testShownCards() {
         Player player = new Player("Игрок");
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
