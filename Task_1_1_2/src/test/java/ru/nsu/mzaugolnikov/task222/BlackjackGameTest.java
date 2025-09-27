@@ -49,4 +49,36 @@ class BlackjackGameTest {
         assertEquals(0, scores[0]);
         assertEquals(1, scores[1]);
     }
+    @Test
+    void testTie() {
+        // Ничья
+        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS)); // 19
+
+        dealer.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.SPADES));
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.DIAMONDS)); // 19
+
+        int[] scores = {0, 0};
+        game.whoIsWinner(player, dealer, scores);
+        assertEquals(0, scores[0]);
+        assertEquals(0, scores[1]);
+    }
+
+    @Test
+    void testDealerTurnHits() {
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.SIX, Cards.Suit.CLUBS)); // 16
+
+        game.dealerTurn(dealer, deck);
+        assertTrue(dealer.getTotal() >= 17 || dealer.isBusted());
+    }
+
+    @Test
+    void testPlayerBusts() {
+        player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.QUEEN, Cards.Suit.CLUBS));
+        player.addCard(new Cards.Card(Cards.Rank.TWO, Cards.Suit.DIAMONDS)); // 22
+        assertTrue(player.isBusted());
+    }
+
 }
