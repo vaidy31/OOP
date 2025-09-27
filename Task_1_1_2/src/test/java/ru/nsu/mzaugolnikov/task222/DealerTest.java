@@ -42,13 +42,12 @@ class DealerTest {
         Dealer dealer = new Dealer("Дилер");
         dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
         dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
-
         dealer.clear();
         assertEquals(0, dealer.getTotal());
         assertFalse(dealer.isBusted());
         assertFalse(dealer.isBlackjack());
     }
-    
+
     @Test
     void testShowAllHand() {
         Dealer dealer = new Dealer("Дилер");
@@ -60,5 +59,34 @@ class DealerTest {
         assertTrue(handStr.contains("Король"));
     }
 
+
+    @Test
+    void testShowCardsHidden() {
+        Dealer dealer = new Dealer("Дилер");
+        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES));
+
+        String strHidden = dealer.showCards(true);
+        assertTrue(strHidden.contains("<закрытая карта>"));
+        assertTrue(strHidden.contains("Король"));
+
+        String strVisible = dealer.showCards(false);
+        assertTrue(strVisible.contains("Десятка"));
+        assertTrue(strVisible.contains("Король"));
+    }
+
+    @Test
+    void testAceAdjustment() {
+        Dealer dealer = new Dealer("Дилер");
+        dealer.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS));
+        dealer.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS));
+        assertEquals(20, dealer.getTotal(), "Туз считается 11, общая сумма 20");
+
+        dealer.addCard(new Cards.Card(Cards.Rank.THREE, Cards.Suit.SPADES));
+        assertEquals(13, dealer.getTotal(), "Туз пересчитан как 1, общая сумма 13");
+
+        dealer.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.DIAMONDS));
+        assertTrue(dealer.isBusted(), "Дилер перебрал");
+    }
 
 }
