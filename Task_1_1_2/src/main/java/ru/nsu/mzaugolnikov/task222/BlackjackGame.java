@@ -2,13 +2,28 @@ package ru.nsu.mzaugolnikov.task222;
 
 import java.util.Scanner;
 
+/**
+ * Основной класс для игры в Blackjack.
+ * Управляет игрой, дилером, игроком. Считает очки и определяет победителя
+ */
 public class BlackjackGame {
+
+    /**
+     * Main. Создает экземпляр игры и запускает процесс
+     * @param args не используются
+     */
     public static void main(String[] args) {
         BlackjackGame game = new BlackjackGame();
         game.startGame();
     }
 
-
+    /**
+     * Управляет игроком.
+     * Позволяет брать карты до тех пор, пока не наступит игровое условие
+     * @param player объект игрока
+     * @param dealer объект дилера
+     * @param deck колода с картами
+     */
     public void playerTurn(Player player, Dealer dealer, Deck deck) {
         Scanner scanner = new Scanner(System.in);
         boolean playerStands = false;
@@ -32,6 +47,12 @@ public class BlackjackGame {
         }
     }
 
+    /**
+     * Управляет дилером.
+     * Берет карты, пока не наступит состояние, когда в его руке < 17 очков.
+     * @param dealer объект дилера
+     * @param deck колода карт
+     */
     public void dealerTurn(Dealer dealer, Deck deck) {
         System.out.println("Ход дилера:");
         System.out.println("-------------");
@@ -51,7 +72,12 @@ public class BlackjackGame {
         }
     }
 
-
+    /**
+     * Определяет победителя раунда и показывает счет.
+     * @param player объект игрока
+     * @param dealer объект дилера
+     * @param scores массив для счета игроков [players_score, dealers_score]
+     */
 
     public void whoIsWinner(Player player, Dealer dealer, int[] scores) {
         int playerTotal = player.getTotal();
@@ -82,6 +108,10 @@ public class BlackjackGame {
         System.out.println("Счет " + scores[0] + ":" + scores[1] + " в вашу пользу.");
     }
 
+    /**
+     * Запускает основную игровую сессию.
+     * Управляет раундами игры, сбором пользовательского ввода и отображением результатов.
+     */
     public void startGame() {
         System.out.println("Добро пожаловать в Блэкджек!");
         Scanner scanner = new Scanner(System.in);
