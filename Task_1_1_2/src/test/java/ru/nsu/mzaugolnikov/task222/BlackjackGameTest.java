@@ -3,6 +3,8 @@ package ru.nsu.mzaugolnikov.task222;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlackjackGameTest {
@@ -81,4 +83,29 @@ class BlackjackGameTest {
         assertTrue(player.isBusted());
     }
 
+    @Test
+    void testPlayerTakesOneCardAndStands() {
+        String simulatedInput = "1\n0\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        player.addCard(deck.dealCard());
+        int initialTotal = player.getTotal();
+
+        game.playerTurn(player, dealer, deck);
+
+        assertEquals(initialTotal + player.getHand().get(1).getRank().getValue(), player.getTotal());
+        assertEquals(2, player.getHand().size());
+    }
+
+    @Test
+    void testPlayerBustsDuringTurn() {
+        String simulatedInput = "1\n1\n1\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS));
+        player.addCard(new Cards.Card(Cards.Rank.QUEEN, Cards.Suit.CLUBS));
+
+        game.playerTurn(player, dealer, deck);
+
+        assertTrue(player.isBusted());
+    }
 }
