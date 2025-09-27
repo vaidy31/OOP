@@ -80,6 +80,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">Cards.Card</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс для игральной карты.
+ Карта состоит из достоинства и масти.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,7 +95,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.mzaugolnikov.task222.Cards.Rank,ru.nsu.mzaugolnikov.task222.Cards.Suit)" class="member-name-link">Card</a><wbr>(<a href="Cards.Rank.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Rank</a>&nbsp;rank,
  <a href="Cards.Suit.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Suit</a>&nbsp;suit)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор карты.</div>
+</div>
 </div>
 </section>
 </li>
@@ -110,13 +114,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Cards.Rank.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Rank</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRank()" class="member-name-link">getRank</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает достоинство карты.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Cards.Suit.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Suit</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSuit()" class="member-name-link">getSuit</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает масть карты.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает строковое представление карты в формате: "Достоинство Масть (Значение)".</div>
+</div>
 </div>
 </div>
 </div>
@@ -139,6 +149,12 @@ loadScripts(document, 'script');</script>
 <h3>Card</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Card</span><wbr><span class="parameters">(<a href="Cards.Rank.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Rank</a>&nbsp;rank,
  <a href="Cards.Suit.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Suit</a>&nbsp;suit)</span></div>
+<div class="block">Конструктор карты.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rank</code> - достоинство карты</dd>
+<dd><code>suit</code> - масть карты</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -153,21 +169,34 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getRank()">
 <h3>getRank</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Cards.Rank.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Rank</a></span>&nbsp;<span class="element-name">getRank</span>()</div>
+<div class="block">Возвращает достоинство карты.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>достоинство карты</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSuit()">
 <h3>getSuit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Cards.Suit.html" title="enum class in ru.nsu.mzaugolnikov.task222">Cards.Suit</a></span>&nbsp;<span class="element-name">getSuit</span>()</div>
+<div class="block">Возвращает масть карты.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>масть карты</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<div class="block">Возвращает строковое представление карты в формате: "Достоинство Масть (Значение)".</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Returns:</dt>
+<dd>строковое представление карты</dd>
 </dl>
 </section>
 </li>

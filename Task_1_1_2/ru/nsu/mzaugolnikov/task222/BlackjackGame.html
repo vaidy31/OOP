@@ -76,6 +76,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BlackjackGame</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Основной класс для игры в Blackjack.
+ Управляет игрой, дилером, игроком. Считает очки и определяет победителя.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,23 +108,33 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dealerTurn(ru.nsu.mzaugolnikov.task222.Dealer,ru.nsu.mzaugolnikov.task222.Deck)" class="member-name-link">dealerTurn</a><wbr>(<a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  <a href="Deck.html" title="class in ru.nsu.mzaugolnikov.task222">Deck</a>&nbsp;deck)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Управляет дилером.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Main.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playerTurn(ru.nsu.mzaugolnikov.task222.Player,ru.nsu.mzaugolnikov.task222.Dealer,ru.nsu.mzaugolnikov.task222.Deck)" class="member-name-link">playerTurn</a><wbr>(<a href="Player.html" title="class in ru.nsu.mzaugolnikov.task222">Player</a>&nbsp;player,
  <a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  <a href="Deck.html" title="class in ru.nsu.mzaugolnikov.task222">Deck</a>&nbsp;deck)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Управляет игроком.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#startGame()" class="member-name-link">startGame</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Запускает основную игровую сессию.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#whoIsWinner(ru.nsu.mzaugolnikov.task222.Player,ru.nsu.mzaugolnikov.task222.Dealer,int%5B%5D)" class="member-name-link">whoIsWinner</a><wbr>(<a href="Player.html" title="class in ru.nsu.mzaugolnikov.task222">Player</a>&nbsp;player,
  <a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  int[]&nbsp;scores)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Определяет победителя раунда и показывает счет.</div>
+</div>
 </div>
 </div>
 </div>
@@ -158,6 +170,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="main(java.lang.String[])">
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
+<div class="block">Main. Создает экземпляр игры и запускает процесс.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>args</code> - не используются</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -166,6 +183,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playerTurn</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.mzaugolnikov.task222">Player</a>&nbsp;player,
  <a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  <a href="Deck.html" title="class in ru.nsu.mzaugolnikov.task222">Deck</a>&nbsp;deck)</span></div>
+<div class="block">Управляет игроком.
+ Позволяет брать карты до тех пор, пока не наступит игровое условие.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - объект игрока</dd>
+<dd><code>dealer</code> - объект дилера</dd>
+<dd><code>deck</code> - колода с картами</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -173,6 +198,13 @@ loadScripts(document, 'script');</script>
 <h3>dealerTurn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">dealerTurn</span><wbr><span class="parameters">(<a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  <a href="Deck.html" title="class in ru.nsu.mzaugolnikov.task222">Deck</a>&nbsp;deck)</span></div>
+<div class="block">Управляет дилером.
+ Берет карты, пока не наступит состояние, когда в его руке меньше 17 очков.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dealer</code> - объект дилера</dd>
+<dd><code>deck</code> - колода карт</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -181,12 +213,21 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">whoIsWinner</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.mzaugolnikov.task222">Player</a>&nbsp;player,
  <a href="Dealer.html" title="class in ru.nsu.mzaugolnikov.task222">Dealer</a>&nbsp;dealer,
  int[]&nbsp;scores)</span></div>
+<div class="block">Определяет победителя раунда и показывает счет.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - объект игрока</dd>
+<dd><code>dealer</code> - объект дилера</dd>
+<dd><code>scores</code> - массив для счета игроков [players_score, dealers_score]</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="startGame()">
 <h3>startGame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">startGame</span>()</div>
+<div class="block">Запускает основную игровую сессию.
+ Управляет раундами игры, сбором пользовательского ввода и отображением результатов.</div>
 </section>
 </li>
 </ul>
