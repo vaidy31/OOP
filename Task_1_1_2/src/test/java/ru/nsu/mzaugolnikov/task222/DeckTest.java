@@ -37,8 +37,7 @@ class DeckTest {
         deck.dealCard();
         deck.dealCard();
         deck.dealCard();
-        final int initialSize = 52;
-        assertEquals(initialSize - 3, 49);
+        assertEquals(52 - 3, deck.size(), "После раздачи 3 карт должно остаться 49");
     }
 
     @Test
