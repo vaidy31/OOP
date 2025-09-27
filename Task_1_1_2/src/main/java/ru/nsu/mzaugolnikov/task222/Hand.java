@@ -60,7 +60,7 @@ public abstract class Hand {
     }
 
     /**
-     * Блэкджек?
+     * БлэкДжек или нет.
      *
      * @return true/false
      */
