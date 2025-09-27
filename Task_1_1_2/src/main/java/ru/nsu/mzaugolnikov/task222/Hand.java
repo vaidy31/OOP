@@ -9,10 +9,10 @@ import ru.nsu.mzaugolnikov.task222.Cards.Card;
  */
 public abstract class Hand {
     private final ArrayList<Cards.Card> hand;
-    int basedScore = 21;
+    final int basedScore = 21;
 
     /**
-     * Конструктор руки. Создает пустую руку.   
+     * Конструктор руки. Создает пустую руку.
      */
     public Hand() {
         hand = new ArrayList<>();
