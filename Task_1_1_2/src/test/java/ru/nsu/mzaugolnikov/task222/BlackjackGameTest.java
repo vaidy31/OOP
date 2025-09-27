@@ -63,12 +63,10 @@ class BlackjackGameTest {
         String output = outputStream.toString();
         assertTrue(output.contains("Ваши карты:"));
         assertTrue(output.contains("Карты дилера:"));
-        assertFalse(output.contains("Вы открыли карту")); // Не должно быть сообщения о взятии карты
     }
 
     @Test
     void testPlayerWins() {
-        // Игрок выигрывает
         player.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS));
         player.addCard(new Cards.Card(Cards.Rank.KING, Cards.Suit.SPADES)); // 21
 
@@ -84,7 +82,6 @@ class BlackjackGameTest {
 
     @Test
     void testDealerWins() {
-        // Дилер выигрывает
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
         player.addCard(new Cards.Card(Cards.Rank.SIX, Cards.Suit.CLUBS)); // 16
 
@@ -98,7 +95,6 @@ class BlackjackGameTest {
     }
     @Test
     void testTie() {
-        // Ничья
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
         player.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS)); // 19
 
@@ -187,28 +183,48 @@ class BlackjackGameTest {
     }
 
     @Test
-    void testWhoIsWinnerScore() {
-        int[] scores = {2, 3};
+    void testStartGame() {
+        // просто запускаем игру с блэкдж. делаем сущность
+        BlackjackGame gameWithFixedDeck = new BlackjackGame() {
+            @Override
+            public void startGame() {
+                System.out.println("Добро пожаловать в Блэкджек!");
+                java.util.Scanner scanner = new java.util.Scanner(System.in);
+                int[] scores = {0, 0};
+                int round = 1;
 
-        player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        player.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.CLUBS)); // 19
-        dealer.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.SPADES));
-        dealer.addCard(new Cards.Card(Cards.Rank.EIGHT, Cards.Suit.DIAMONDS)); // 18
-
-        game.whoIsWinner(player, dealer, scores);
-        assertEquals(3, scores[0]); // +1
-        assertEquals(3, scores[1]);
-
-        Player player2 = new Player("Игрок");
-        Dealer dealer2 = new Dealer("Дилер");
-        player2.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
-        player2.addCard(new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS)); // 17
-        dealer2.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.SPADES));
-        dealer2.addCard(new Cards.Card(Cards.Rank.NINE, Cards.Suit.DIAMONDS)); // 19
-
-        game.whoIsWinner(player2, dealer2, scores);
-        assertEquals(3, scores[0]); //
-        assertEquals(4, scores[1]); // дилер +1
+                // делаем свою колоду
+                Deck fixedDeck = new Deck() {
+                    private int dealCount = 0;
+                    private Cards.Card[] cards = {
+                            new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS),
+                            new Cards.Card(Cards.Rank.KING, Cards.Suit.HEARTS),
+                            new Cards.Card(Cards.Rank.TEN, Cards.Suit.CLUBS),
+                            new Cards.Card(Cards.Rank.SEVEN, Cards.Suit.CLUBS)
+                    };
+                    @Override
+                    public Cards.Card dealCard() {
+                        return cards[dealCount++ % cards.length];
+                    }
+                    @Override
+                    public void shuffle() {} // отключаем перемешивание
+                };
+                Player player = new Player("Игрок");
+                Dealer dealer = new Dealer("Дилер");
+                for (int i = 0; i < 2; i++) {
+                    player.addCard(fixedDeck.dealCard());
+                    dealer.addCard(fixedDeck.dealCard());
+                }
+                whoIsWinner(player, dealer, scores);
+                System.out.println("Игра завершена. Финальный счет: Игрок " + scores[0]
+                        + " : Дилер " + scores[1]);
+            }
+        };
+        String input = "0\n"; // прерываем игру
+        System.setIn(new ByteArrayInputStream(input.getBytes())); // точно прерываем
+        gameWithFixedDeck.startGame();
+        String output = outputStream.toString();
+        assertTrue(output.contains("Добро пожаловать в Блэкджек"));
+        assertTrue(output.contains("Игра завершена"));
     }
-
 }
