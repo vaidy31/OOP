@@ -174,18 +174,16 @@ class BlackjackGameTest {
 
     @Test
     void testPlayerTurnBusts() {
-        // Тест когда игрок перебирает
         String input = "1\n1\n1\n"; // берет много карт
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Даем игроку карты с большим количеством очков
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.CLUBS));
 
         game.playerTurn(player, dealer, deck);
 
         String output = outputStream.toString();
-        assertTrue(output.contains("Перебор"));
+        assertTrue(output.contains("перебрали"));
     }
 
     @Test
