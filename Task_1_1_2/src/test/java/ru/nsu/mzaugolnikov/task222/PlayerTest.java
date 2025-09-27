@@ -1,7 +1,6 @@
 package ru.nsu.mzaugolnikov.task222;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,6 +15,7 @@ class PlayerTest {
         assertEquals(17, player.getTotal());
     }
 
+    @Test
     void testBlackjack() {
         Player player = new Player("Игрок");
         player.addCard(new Cards.Card(Cards.Rank.ACE, Cards.Suit.HEARTS));
@@ -32,6 +32,7 @@ class PlayerTest {
         assertTrue(player.isBusted());
     }
 
+    @Test
     void testClearHand() {
         Player player = new Player("Игрок");
         player.addCard(new Cards.Card(Cards.Rank.TEN, Cards.Suit.HEARTS));

@@ -33,10 +33,10 @@ class DeckTest {
     @Test
     void testDeckSizeAfter() {
         Deck deck = new Deck();
-        int initialSize = 52;
         deck.dealCard();
         deck.dealCard();
         deck.dealCard();
+        final int initialSize = 52;
         assertEquals(initialSize - 3, 49);
     }
 
