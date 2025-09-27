@@ -25,11 +25,8 @@ public class Dealer extends Hand {
      */
     public String startHiddenHand() {
         StringBuilder sb = new StringBuilder("[");
-        if (!getHand().isEmpty()) {
-            sb.append(getHand().get(0).toString());
-            if (getHand().size() > 1) {
-                sb.append(", <закрытая карта>");
-            }
+        if (getHandSize() > 0) {
+            sb.append(getCard(0).toString()).append(", <закрытая карта>");
         }
         sb.append("]");
         return sb.toString();

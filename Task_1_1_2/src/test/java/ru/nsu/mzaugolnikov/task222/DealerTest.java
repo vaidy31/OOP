@@ -76,7 +76,7 @@ class DealerTest {
     void testConstructor() {
         Dealer dealer = new Dealer("Дилер");
         assertEquals("Дилер", dealer.getName());
-        assertEquals(0, dealer.getHand().size());
+        assertEquals(0, dealer.getHandSize());
         assertEquals(0, dealer.getTotal());
     }
 

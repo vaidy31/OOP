@@ -43,7 +43,8 @@ public abstract class Hand {
                 aceCount++;
             }
         }
-        while (total > 21 && aceCount > 0) {
+        int basedScore = 21;
+        while (total > basedScore && aceCount > 0) {
             total -= 10;
             aceCount--;
         }
@@ -99,11 +100,23 @@ public abstract class Hand {
     }
 
     /**
-     * Возвращает копию списка карт на руке.
+     * геттер для получения размера руки.
      *
-     * @return копия списка карт
+     * @return размер руки
      */
-    public ArrayList<Cards.Card> getHand() {
-        return new ArrayList<>(hand); //копия чтобы не изменять исходный массив
+    public int getHandSize() {
+        return hand.size();
     }
+
+    /**
+     * получение карты по индексу.
+     */
+    public Cards.Card getCard(int index) {
+        if (index < 0 || index >= hand.size()) {
+            return null; // Или можно выбросить исключение, если индекс некорректен
+        }
+        return hand.get(index);
+    }
+
+
 }
