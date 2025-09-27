@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class BlackjackGame {
 
     /**
-     * Main. Создает экземпляр игры и запускает процесс
+     * Main. Создает экземпляр игры и запускает процесс.
+     *
      * @param args не используются
      */
     public static void main(String[] args) {
@@ -29,7 +30,8 @@ public class BlackjackGame {
         boolean playerStands = false;
 
         while (!playerStands && !player.isBusted()) {
-            System.out.println("Ваши карты: " + player.showCards(false) + " ==> " + player.getTotal());
+            System.out.println("Ваши карты: " + player.showCards(false) +
+                    " ==> " + player.getTotal());
             System.out.println("Карты дилера: " + dealer.startHiddenHand());
             System.out.print("Введите 1, чтобы взять карту, 0 чтобы остановиться: ");
             int choice = scanner.nextInt();
@@ -39,7 +41,8 @@ public class BlackjackGame {
                 player.addCard(newCard);
                 System.out.println("Вы открыли карту " + newCard);
                 if (player.isBusted()) {
-                    System.out.println("Вы перебрали! Ваши карты: " + player.showCards(false) + " > " + player.getTotal());
+                    System.out.println("Вы перебрали! Ваши карты: " + player.showCards(false) +
+                            " > " + player.getTotal());
                 }
             } else {
                 playerStands = true;
@@ -49,7 +52,7 @@ public class BlackjackGame {
 
     /**
      * Управляет дилером.
-     * Берет карты, пока не наступит состояние, когда в его руке < 17 очков.
+     * Берет карты, пока не наступит состояние, когда в его руке меньше 17 очков.
      * @param dealer объект дилера
      * @param deck колода карт
      */
@@ -58,13 +61,15 @@ public class BlackjackGame {
         System.out.println("-------------");
 
         System.out.println("Дилер открывает закрытую карту");
-        System.out.println("Карты дилера: " + dealer.showAllHand() + " > " + dealer.getTotal());
+        System.out.println("Карты дилера: " + dealer.showAllHand() +
+                " > " + dealer.getTotal());
 
         while (dealer.getTotal() < 17) {
             Cards.Card newCard = deck.dealCard();
             dealer.addCard(newCard);
             System.out.println("Дилер открывает карту " + newCard);
-            System.out.println("Карты дилера: " + dealer.showAllHand() + " > " + dealer.getTotal());
+            System.out.println("Карты дилера: " + dealer.showAllHand() +
+                    " > " + dealer.getTotal());
         }
 
         if (dealer.isBusted()) {
@@ -78,7 +83,6 @@ public class BlackjackGame {
      * @param dealer объект дилера
      * @param scores массив для счета игроков [players_score, dealers_score]
      */
-
     public void whoIsWinner(Player player, Dealer dealer, int[] scores) {
         int playerTotal = player.getTotal();
         int dealerTotal = dealer.getTotal();
@@ -92,10 +96,12 @@ public class BlackjackGame {
             System.out.println("Вы выиграли! Дилер перебрал.");
             playerWins++;
         } else if (playerTotal > dealerTotal) {
-            System.out.println("Вы выиграли! Ваши очки: " + playerTotal + ", очки дилера: " + dealerTotal);
+            System.out.println("Вы выиграли! Ваши очки: " + playerTotal +
+                    ", очки дилера: " + dealerTotal);
             playerWins++;
         } else if (playerTotal < dealerTotal) {
-            System.out.println("Вы проиграли! Ваши очки: " + playerTotal + ", очки дилера: " + dealerTotal);
+            System.out.println("Вы проиграли! Ваши очки: " + playerTotal +
+                    ", очки дилера: " + dealerTotal);
         } else {
             System.out.println("Ничья! Оба набрали " + playerTotal + " очков.");
             flag++;
@@ -136,7 +142,8 @@ public class BlackjackGame {
             }
 
             System.out.println("Дилер раздал карты");
-            System.out.println("Ваши карты: " + player.showCards(false) + " > " + player.getTotal());
+            System.out.println("Ваши карты: " + player.showCards(false) +
+                    " > " + player.getTotal());
             System.out.println("Карты дилера: " + dealer.startHiddenHand());
 
             if (player.isBlackjack() || dealer.isBlackjack()) {
@@ -157,6 +164,7 @@ public class BlackjackGame {
             round++;
         }
 
-        System.out.println("Игра завершена. Финальный счет: Игрок " + scores[0] + " : Дилер " + scores[1]);
+        System.out.println("Игра завершена. Финальный счет: Игрок " + scores[0]
+                + " : Дилер " + scores[1]);
     }
 }

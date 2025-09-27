@@ -97,6 +97,7 @@ public abstract class Hand {
         sb.append( "]");
         return sb.toString();
     }
+
     /**
      * Возвращает копию списка карт на руке.
      *

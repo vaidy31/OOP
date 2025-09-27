@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Класс, представляющий колоду карт
- * 52 карты
+ * Класс, представляющий колоду карт.
+ * 52 карты.
  */
 public class Deck {
     private final ArrayList<Cards.Card> cards;
     /**
-     * Конструктор колоды. Создает и перемешивает колоду из 52 карт
+     * Конструктор колоды. Создает и перемешивает колоду из 52 карт.
      */
     public Deck() {
         cards = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Deck {
     }
 
     /**
-     * Инициализирует колоду - создает все 52 карты
+     * Инициализирует колоду - создает все 52 карты.
      */
     public void init() {
         for (Cards.Suit suit : Cards.Suit.values()) {
@@ -38,7 +38,7 @@ public class Deck {
     }
 
     /**
-     * Перемешка колоды
+     * Перемешка колоды.
      */
     public void shuffle() {
         Collections.shuffle(cards);
@@ -46,7 +46,7 @@ public class Deck {
     }
 
     /**
-     * Раздача одной карты из колоды
+     * Раздача одной карты из колоды.
      *
      * @return карта из начала или null если колода пуста
      */

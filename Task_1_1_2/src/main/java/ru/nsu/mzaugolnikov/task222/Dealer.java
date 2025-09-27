@@ -4,7 +4,7 @@ package ru.nsu.mzaugolnikov.task222;
  * Класс для дилера.
  * Наследует Hand
  */
-public class Dealer extends Hand{
+public class Dealer extends Hand {
     private final String name;
 
     /**
