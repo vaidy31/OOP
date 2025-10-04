@@ -20,6 +20,7 @@ public class Variable extends Expression {
 
     /**
      * Вычисляет значения переменной по строке.
+     *
      * @param values значение переменной.
      * @return кидаем IlliargExecption если переменной нет
      */

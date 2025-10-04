@@ -11,7 +11,7 @@ public class Sub extends Expression {
 
     /**
      * Конструктор.
-     * 
+     *
      * @param left левое вырадение
      * @param right правое выражение
      */
