@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тест для Number.
+ */
 public class NumberTest {
 
     @Test

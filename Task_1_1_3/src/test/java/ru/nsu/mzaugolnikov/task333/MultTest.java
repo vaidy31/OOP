@@ -11,6 +11,7 @@ class MultTest {
     private Expression num1;
     private Expression varX;
     private Expression varY;
+
     @BeforeEach
     void setUp() {
         num0 = new Number(23);
