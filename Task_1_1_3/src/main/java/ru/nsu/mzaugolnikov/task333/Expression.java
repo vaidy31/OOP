@@ -55,6 +55,7 @@ public abstract class Expression {
 
     /**
      * isVariable or not.
+     *
      * @return false
      */
     public boolean isVariable() {
