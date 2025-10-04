@@ -22,21 +22,21 @@ class MultTest {
     void testEval_TwoNumbers() {
         Expression mult = new Mult(num0, num1);
         double result = mult.eval("x=5; y=10");
-        assertEquals(69.0, result, 0.001);
+        assertEquals(69.0, result);
     }
 
     @Test
     void testEval_NumberAndVariable() {
         Expression mult = new Mult(num0, varX);
         double result = mult.eval("x=5; y=10");
-        assertEquals(115.0, result, 0.001);
+        assertEquals(115.0, result);
     }
 
     @Test
     void testEval_TwoVariables() {
         Expression mult = new Mult(varX, varY);
         double result = mult.eval("x=10; y=10");
-        assertEquals(100.0, result, 0.001);
+        assertEquals(100.0, result);
     }
 
 }
