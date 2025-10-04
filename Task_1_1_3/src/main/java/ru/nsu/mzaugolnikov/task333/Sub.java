@@ -4,13 +4,14 @@ package ru.nsu.mzaugolnikov.task333;
  * Класс для вычитания.
  */
 public class Sub extends Expression {
-    /** Левый операнд вычитания */
+    /** Левый операнд вычитания. */
     private final Expression left;
-    /** Правый операнд вычитания */
+    /** Правый операнд вычитания. */
     private final Expression right;
 
     /**
      * Конструктор.
+     * 
      * @param left левое вырадение
      * @param right правое выражение
      */

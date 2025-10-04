@@ -43,10 +43,11 @@ public class Div extends Expression {
      */
     @Override
     public Expression derivative(String var) {
-        Expression fPrime = chislitel.derivative(var);
-        Expression gPrime = znamenatel.derivative(var);
+        Expression a = chislitel.derivative(var);
+        Expression b = znamenatel.derivative(var);
 
-        Expression chis = new Sub(new Mult(fPrime, znamenatel.clone()), new Mult(chislitel.clone(), gPrime));
+        Expression chis = new Sub(new Mult(a, znamenatel.clone()),
+                new Mult(chislitel.clone(), b));
         Expression znam = new Mult(znamenatel.clone(), znamenatel.clone());
 
         return new Div(chis, znam);
@@ -70,10 +71,14 @@ public class Div extends Expression {
         }
 
         // 0 / x = 0
-        if (c.isNumber() && c.getValue() == 0) return new Number(0);
+        if (c.isNumber() && c.getValue() == 0) {
+            return new Number(0);
+        }
 
         // x / 1 = x
-        if (z.isNumber() && z.getValue() == 1) return c;
+        if (z.isNumber() && z.getValue() == 1) {
+            return c;
+        }
 
         // иначе оставляем деление как есть
         return new Div(c, z);

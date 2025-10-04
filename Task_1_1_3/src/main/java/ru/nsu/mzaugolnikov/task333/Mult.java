@@ -62,8 +62,12 @@ public class Mult extends Expression {
             return new Number(0);
         }
 
-        if (lef.isNumber() && lef.getValue() == 1) return rig;
-        if (rig.isNumber() && rig.getValue() == 1) return lef;
+        if (lef.isNumber() && lef.getValue() == 1) {
+            return rig;
+        }
+        if (rig.isNumber() && rig.getValue() == 1) {
+            return lef;
+        }
 
         return new Mult(lef, rig);
     }

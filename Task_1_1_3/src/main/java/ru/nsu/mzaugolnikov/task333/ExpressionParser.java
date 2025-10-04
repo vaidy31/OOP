@@ -1,7 +1,7 @@
 package ru.nsu.mzaugolnikov.task333;
 
 /**
- * Преобразование строк в математические выражения
+ * Преобразование строк в математические выражения.
  */
 public class ExpressionParser {
 
@@ -32,12 +32,18 @@ public class ExpressionParser {
         // ищем + или -
         for (int i = s.length() - 1; i >= 0; i--) {
             char c = s.charAt(i);
-            if (c == ')') continue;
+            if (c == ')') {
+                continue;
+            }
             if (c == '+' || c == '-') {
                 String left = s.substring(0, i);
                 String right = s.substring(i + 1);
-                if (c == '+') return new Add(parseExpr(left), parseExpr(right));
-                else return new Sub(parseExpr(left), parseExpr(right));
+                if (c == '+') {
+                    return new Add(parseExpr(left), parseExpr(right));
+                }
+                else {
+                    return new Sub(parseExpr(left), parseExpr(right));
+                }
             }
         }
 
@@ -78,9 +84,15 @@ public class ExpressionParser {
         int b = 0;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == '(') b++;
-            if (c == ')') b--;
-            if (b < 0) return false;
+            if (c == '(') {
+                b++;
+            }
+            if (c == ')') {
+                b--;
+            }
+            if (b < 0) {
+                return false;
+            }
         }
         return b == 0;
     }
