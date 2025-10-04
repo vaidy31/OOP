@@ -2,9 +2,7 @@ package ru.nsu.mzaugolnikov.task333;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import org.junit.jupiter.api.Test;
-
 
 /**
  * ТЕсты ради деления.

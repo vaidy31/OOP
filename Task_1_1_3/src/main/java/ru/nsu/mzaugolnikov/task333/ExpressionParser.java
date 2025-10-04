@@ -71,8 +71,7 @@ public class ExpressionParser {
         try {
             double val = Double.parseDouble(s);
             return new Number(val);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new Variable(s);
         }
     }
