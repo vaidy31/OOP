@@ -1,14 +1,28 @@
 package ru.nsu.mzaugolnikov.task333;
 
 public class Div extends Expression {
+    /** Верхний операнд. */
     private final Expression chislitel;
+    /** Нижний операнд. */
     private final Expression znamenatel;
 
+    /**
+     * Конструктор для делени.
+     *
+     * @param chislitel сверху
+     * @param znamenatel снизу
+     */
     public Div(Expression chislitel, Expression znamenatel) {
         this.chislitel = chislitel;
         this.znamenatel = znamenatel;
     }
 
+    /**
+     * Считает значение при заданных переменных.
+     *
+     * @param values строка
+     * @return результат
+     */
     @Override
     public double eval(String values) {
         double znamVal = znamenatel.eval(values);
@@ -18,6 +32,12 @@ public class Div extends Expression {
         return chislitel.eval(values) / znamVal;
     }
 
+    /**
+     * Дифференцирование.
+     *
+     * @param var имя
+     * @return новое выражение
+     */
     @Override
     public Expression derivative(String var) {
         Expression fPrime = chislitel.derivative(var);
@@ -29,6 +49,11 @@ public class Div extends Expression {
         return new Div(chis, znam);
     }
 
+    /**
+     * Упрощение выражения по базе матана.
+     *
+     * @return новое упрощённое выражение
+     */
     @Override
     public Expression simplify() {
         Expression c = chislitel.simplify();
@@ -51,12 +76,21 @@ public class Div extends Expression {
         return new Div(c, z);
     }
 
-
+    /**
+     * Создание копий выражения.
+     *
+     * @return новое выражение Div с клонами операндов
+     */
     @Override
     public Expression clone() {
         return new Div(chislitel.clone(), znamenatel.clone());
     }
 
+    /**
+     * Преобразует выражение в строку.
+     *
+     * @return строка
+     */
     @Override
     public String toString() {
         return "(" + chislitel.toString() + " / " + znamenatel.toString() + ")";

@@ -16,16 +16,34 @@ public class Sub extends Expression {
         this.right = right;
     }
 
+    /**
+     * Вычисление значения вычитания.
+     *
+     * @param values строка  с присвоениями перменных.
+     * @return result
+     */
     @Override
     public double eval(String values) {
         return left.eval(values) - right.eval(values);
     }
 
+    /**
+     * Берет производную.
+     *
+     * @param var имя переменной
+     * @return новое выражение
+     */
     @Override
     public Expression derivative(String var) {
         return new Sub(left.derivative(var), right.derivative(var));
     }
 
+    /**
+     * Упрощение выражения.
+     * База матана.
+     *
+     * @return новое упрощённое выражение
+     */
     @Override
     public Expression simplify() {
         Expression l = left.simplify();
@@ -50,11 +68,21 @@ public class Sub extends Expression {
         return new Sub(l, r);
     }
 
+    /**
+     * Создает копию выражения.
+     *
+     * @return новое выражение
+     */
     @Override
     public Expression clone() {
         return new Sub(left.clone(), right.clone());
     }
 
+    /**
+     * Преобразует выражение в строку.
+     *
+     * @return строка
+     */
     @Override
     public String toString() {
         return "(" + left.toString() + " - " + right.toString() + ")";

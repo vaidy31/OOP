@@ -37,6 +37,7 @@ public class Variable extends Expression {
 
     /**
      * Производная от переменной.
+     *
      * @param var имя переменной
      * @return выражение, с производной 1 или 0
      */
@@ -46,7 +47,8 @@ public class Variable extends Expression {
     }
 
     /**
-     * упрощение переменной
+     * упрощение переменной.
+     *
      * @return this
      */
     @Override
@@ -55,7 +57,8 @@ public class Variable extends Expression {
     }
 
     /**
-     * создает копию переменной
+     * создает копию переменной.
+     *
      * @return new obj с этим же именем
      */
     @Override
@@ -64,7 +67,8 @@ public class Variable extends Expression {
     }
 
     /**
-     * геттер для строки
+     * геттер для строки.
+     *
      * @return строка
      */
     @Override
