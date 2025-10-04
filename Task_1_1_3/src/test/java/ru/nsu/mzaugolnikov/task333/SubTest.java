@@ -23,11 +23,11 @@ public class SubTest {
     public void testDerivative() {
         Expression expr = new Sub(new Variable("x"), new Number(456));
         Expression deriv = expr.derivative("x");
-        assertEquals(1.0, deriv.eval("x=10"), 0.001);
+        assertEquals(1.0, deriv.eval("x=10"));
 
         Expression expr2 = new Sub(new Number(6747), new Variable("y"));
         Expression deriv2 = expr2.derivative("y");
-        assertEquals(-1.0, deriv2.eval("y=3"), 0.001);
+        assertEquals(-1.0, deriv2.eval("y=3"));
     }
 
     @Test

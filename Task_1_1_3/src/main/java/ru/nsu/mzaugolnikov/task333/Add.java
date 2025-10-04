@@ -58,7 +58,7 @@ public class Add extends Expression {
         if (rig instanceof Number && ((Number) rig).eval("") == 0) {
             return lef;
         }
-
+        
         return new Add(lef, rig);
     }
 
