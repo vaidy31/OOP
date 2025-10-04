@@ -52,4 +52,12 @@ public abstract class Expression {
     public double getValue() {
         throw new UnsupportedOperationException("Not a number");
     }
+
+    /**
+     * isVariable or not.
+     * @return false
+     */
+    public boolean isVariable() {
+        return false;
+    }
 }

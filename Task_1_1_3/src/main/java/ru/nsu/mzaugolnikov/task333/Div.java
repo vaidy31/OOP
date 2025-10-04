@@ -103,6 +103,13 @@ public class Div extends Expression {
      */
     @Override
     public String toString() {
-        return "(" + chislitel.toString() + " / " + znamenatel.toString() + ")";
+        String l = (chislitel.isNumber() || chislitel.isVariable())
+                ? chislitel.toString()
+                : "(" + chislitel.toString() + ")";
+        String r = (znamenatel.isNumber() || znamenatel.isVariable())
+                ? znamenatel.toString()
+                : "(" + znamenatel.toString() + ")";
+        return l + " / " + r;
     }
+
 }

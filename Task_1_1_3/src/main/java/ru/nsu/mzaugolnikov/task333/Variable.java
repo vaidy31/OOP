@@ -76,4 +76,14 @@ public class Variable extends Expression {
     public String toString() {
         return name;
     }
+
+    /**
+     * is variable or not.
+     * @return true
+     */
+    @Override
+    public boolean isVariable() {
+        return true;
+    }
+
 }

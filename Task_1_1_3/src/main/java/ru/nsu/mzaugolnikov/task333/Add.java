@@ -58,7 +58,7 @@ public class Add extends Expression {
         if (rig instanceof Number && ((Number) rig).eval("") == 0) {
             return lef;
         }
-        
+
         return new Add(lef, rig);
     }
 
@@ -68,7 +68,9 @@ public class Add extends Expression {
      */
     @Override
     public String toString() {
-        return "(" + left.toString() + " + " + right.toString() + ")";
+        String l = (left.isNumber() || left.isVariable()) ? left.toString() : "(" + left.toString() + ")";
+        String r = (right.isNumber() || right.isVariable()) ? right.toString() : "(" + right.toString() + ")";
+        return l + " + " + r;
     }
 
     /**
