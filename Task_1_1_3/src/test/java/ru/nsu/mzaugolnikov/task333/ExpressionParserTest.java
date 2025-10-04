@@ -33,6 +33,12 @@ class ExpressionParserTest {
         assertTrue(ExpressionParser.check("a + b"));
         assertTrue(ExpressionParser.check(""));
     }
-    
+
+    @Test
+    public void test3232() {
+        Expression expr = ExpressionParser.parse("((a + b) * (c - d))");
+        assertEquals("((a + b) * (c - d))", expr.toString());
+        assertEquals(12.0, expr.eval("a = 2; b = 2; c = 5; d = 2"), 1e-6);
+    }
 
 }

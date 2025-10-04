@@ -30,12 +30,14 @@ public class ExpressionParser {
         }
 
         // ищем + или -
+        int level = 0;
         for (int i = s.length() - 1; i >= 0; i--) {
             char c = s.charAt(i);
             if (c == ')') {
-                continue;
-            }
-            if (c == '+' || c == '-') {
+                level++;
+            } else if (c == '(') {
+                level--;
+            } else if (level == 0 && (c == '+' || c == '-')) {
                 String left = s.substring(0, i);
                 String right = s.substring(i + 1);
                 if (c == '+') {
@@ -47,12 +49,14 @@ public class ExpressionParser {
         }
 
         // ищем * или /
+        level = 0;
         for (int i = s.length() - 1; i >= 0; i--) {
             char c = s.charAt(i);
             if (c == ')') {
-                continue;
-            }
-            if (c == '*' || c == '/') {
+                level++;
+            } else if (c == '(') {
+                level--;
+            } else if (level == 0 && (c == '*' || c == '/')) {
                 String left = s.substring(0, i);
                 String right = s.substring(i + 1);
                 if (c == '*') {
