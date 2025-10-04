@@ -89,10 +89,7 @@ public class Mult extends Expression {
      */
     @Override
     public String toString() {
-        String l = (left.isNumber() || left.isVariable()) ? left.toString() : "("
-                + left.toString() + ")";
-        String r = (right.isNumber() || right.isVariable()) ? right.toString() : "("
-                + right.toString() + ")";
-        return l + " * " + r;
+        return "(" + left.toString() + " * " + right.toString() + ")";
     }
+
 }

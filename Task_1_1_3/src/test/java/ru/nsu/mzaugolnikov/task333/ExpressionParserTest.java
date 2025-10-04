@@ -22,10 +22,10 @@ class ExpressionParserTest {
     @Test
     public void testParseSimpleExpressions() {
         Expression expr = ExpressionParser.parse("23+32");
-        assertEquals("23.0 + 32.0", expr.toString());
+        assertEquals("(23.0 + 32.0)", expr.toString());
 
         Expression expr2 = ExpressionParser.parse("x*y");
-        assertEquals("x * y", expr2.toString());
+        assertEquals("(x * y)", expr2.toString());
     }
 
 }

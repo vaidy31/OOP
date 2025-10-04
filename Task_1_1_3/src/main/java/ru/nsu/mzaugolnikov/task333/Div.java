@@ -65,11 +65,11 @@ public class Div extends Expression {
 
         // если обе части числа, вычисляем результат
         if (c.isNumber() && z.isNumber()) {
-            double ValueOfZ = z.getValue();
-            if (ValueOfZ == 0) {
+            double valueOfZ = z.getValue();
+            if (valueOfZ == 0) {
                 throw new ArithmeticException("Division by zero");
             }
-            return new Number(c.getValue() / ValueOfZ);
+            return new Number(c.getValue() / valueOfZ);
         }
 
         // 0 / x = 0
@@ -103,13 +103,7 @@ public class Div extends Expression {
      */
     @Override
     public String toString() {
-        String l = (chislitel.isNumber() || chislitel.isVariable())
-                ? chislitel.toString()
-                : "(" + chislitel.toString() + ")";
-        String r = (znamenatel.isNumber() || znamenatel.isVariable())
-                ? znamenatel.toString()
-                : "(" + znamenatel.toString() + ")";
-        return l + " / " + r;
+        return "(" + chislitel.toString() + " / " + znamenatel.toString() + ")";
     }
-
 }
+
