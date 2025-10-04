@@ -79,6 +79,7 @@ public class Variable extends Expression {
 
     /**
      * is variable or not.
+     *
      * @return true
      */
     @Override

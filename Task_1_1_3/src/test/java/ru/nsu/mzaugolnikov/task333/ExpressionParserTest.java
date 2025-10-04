@@ -3,7 +3,6 @@ package ru.nsu.mzaugolnikov.task333;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,5 +26,13 @@ class ExpressionParserTest {
         Expression expr2 = ExpressionParser.parse("x*y");
         assertEquals("(x * y)", expr2.toString());
     }
+
+    public void testBalanced() {
+        assertTrue(ExpressionParser.check("(x + y)"));
+        assertTrue(ExpressionParser.check("((a + b) * (c - d))"));
+        assertTrue(ExpressionParser.check("a + b"));
+        assertTrue(ExpressionParser.check(""));
+    }
+    
 
 }

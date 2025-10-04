@@ -40,8 +40,7 @@ public class ExpressionParser {
                 String right = s.substring(i + 1);
                 if (c == '+') {
                     return new Add(parseExpr(left), parseExpr(right));
-                }
-                else {
+                } else {
                     return new Sub(parseExpr(left), parseExpr(right));
                 }
             }
@@ -58,8 +57,7 @@ public class ExpressionParser {
                 String right = s.substring(i + 1);
                 if (c == '*') {
                     return new Mult(parseExpr(left), parseExpr(right));
-                }
-                else {
+                } else {
                     return new Div(parseExpr(left), parseExpr(right));
                 }
             }
@@ -81,7 +79,7 @@ public class ExpressionParser {
      * @param s строка
      * @return true/false соотвестветсвенно
      */
-    private static boolean check(String s) {
+    static boolean check(String s) {
         int b = 0;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
