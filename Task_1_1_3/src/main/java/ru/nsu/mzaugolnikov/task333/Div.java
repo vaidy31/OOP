@@ -1,5 +1,8 @@
 package ru.nsu.mzaugolnikov.task333;
 
+/**
+ * Класс для деления.
+ */
 public class Div extends Expression {
     /** Верхний операнд. */
     private final Expression chislitel;

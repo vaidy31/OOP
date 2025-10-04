@@ -1,5 +1,8 @@
 package ru.nsu.mzaugolnikov.task333;
 
+/**
+ * Класс для вычитания.
+ */
 public class Sub extends Expression {
     /** Левый операнд вычитания */
     private final Expression left;

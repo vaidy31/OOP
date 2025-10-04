@@ -1,9 +1,12 @@
 package ru.nsu.mzaugolnikov.task333;
 
+/**
+ * Класс для сложения.
+ */
 public class Add extends Expression {
-    /** Левый операнд */
+    /** Левый операнд. */
     private final Expression left;
-    /** Правый операнд */
+    /** Правый операнд. */
     private final Expression right;
 
     /**

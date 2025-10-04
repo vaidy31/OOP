@@ -1,5 +1,8 @@
 package ru.nsu.mzaugolnikov.task333;
 
+/**
+ * Класс для умножения.
+ */
 public class Mult extends Expression {
     /** Левый операнд. */
     private final Expression left;
