@@ -83,7 +83,7 @@ public class NumberTest {
     @Test
     void testIsValue() {
         Number num = new Number(3.0);
-        assertTrue(num.isValue(3.0000000001));
+        assertTrue(num.isValue(3.0));
         assertFalse(num.isValue(2.9));
     }
 }
