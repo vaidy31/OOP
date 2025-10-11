@@ -1,4 +1,4 @@
-package ru.nsu.mzaugolnikov.task333.Exeptions;
+package ru.nsu.mzaugolnikov.task333.exeptions;
 
 /**
  * Класс для исключения.
@@ -14,7 +14,7 @@ public class StrangeOperationException extends ExpresionExeption {
 
     /**
      * Другие случаи.
-     * 
+     *
      * @param message сообщение
      */
     public StrangeOperationException(String message) {

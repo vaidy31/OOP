@@ -1,8 +1,6 @@
 package ru.nsu.mzaugolnikov.task333;
 
-import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeArgumentException;
-import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeOperationException;
-
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 import java.util.HashMap;
 import java.util.Map;
 

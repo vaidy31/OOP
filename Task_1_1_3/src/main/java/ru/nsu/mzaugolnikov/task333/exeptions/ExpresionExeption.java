@@ -1,4 +1,4 @@
-package ru.nsu.mzaugolnikov.task333.Exeptions;
+package ru.nsu.mzaugolnikov.task333.exeptions;
 
 /**
  * Класс для исключения.

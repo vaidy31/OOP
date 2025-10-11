@@ -1,6 +1,6 @@
 package ru.nsu.mzaugolnikov.task333;
 
-import ru.nsu.mzaugolnikov.task333.Exeptions.DivisionByZeroException;
+import ru.nsu.mzaugolnikov.task333.exeptions.DivisionByZeroException;
 
 /**
  * Класс для деления.

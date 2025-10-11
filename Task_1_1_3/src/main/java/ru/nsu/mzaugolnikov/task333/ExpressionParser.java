@@ -1,7 +1,5 @@
 package ru.nsu.mzaugolnikov.task333;
 
-import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeOperationException;
-
 /**
  * Преобразование строк в математические выражения.
  */

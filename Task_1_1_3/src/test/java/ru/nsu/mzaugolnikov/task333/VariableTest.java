@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeOperationException;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 
 /**
  * Тест для VVariable.
