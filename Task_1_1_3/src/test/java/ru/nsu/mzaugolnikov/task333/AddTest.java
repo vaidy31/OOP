@@ -43,7 +43,7 @@ public class AddTest {
         Expression expr3 = new Sub(new Number(230), new Number(2));
         Expression simplified3 = expr3.simplify();
         assertTrue(simplified3.isNumber());
-        assertEquals(228, ((Number)simplified3).getValue());
+        assertEquals(228, ((Number) simplified3).getValue());
     }
 
     @Test
