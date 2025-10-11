@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.mzaugolnikov.task333"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.mzaugolnikov.task333"},{"l":"ru.nsu.mzaugolnikov.task333.Exeptions"}];updateSearchResults();
