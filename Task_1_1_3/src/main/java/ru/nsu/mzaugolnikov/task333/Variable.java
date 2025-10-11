@@ -1,8 +1,8 @@
 package ru.nsu.mzaugolnikov.task333;
 
-import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 import java.util.HashMap;
 import java.util.Map;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 
 /**
  * представляет переменную в математическом выражении.

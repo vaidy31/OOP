@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
 import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 
 /**
@@ -78,5 +79,11 @@ class VariableTest {
         Variable delta = new Variable("delta");
         Expression deltaX = delta.derivative("delta");
         assertEquals(1.0, deltaX.getValue());
+    }
+
+    @Test
+    void testUndefinedVariable() {
+        Variable x = new Variable("x");
+        assertThrows(StrangeArgumentException.class, () -> x.eval("y=5"));
     }
 }

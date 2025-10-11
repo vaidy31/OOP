@@ -1,8 +1,10 @@
 package ru.nsu.mzaugolnikov.task333;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.mzaugolnikov.task333.exeptions.DivisionByZeroException;
 
 /**
  * ТЕсты ради деления.
@@ -41,5 +43,11 @@ class DivTest {
         Expression expr = new Div(new Variable("x"), new Number(2));
         Expression clone = expr.clone();
         assertEquals(expr.toString(), clone.toString());
+    }
+
+    @Test
+    void testDivisionByZero() {
+        Expression expr = new Div(new Number(5), new Number(0));
+        assertThrows(DivisionByZeroException.class, () -> expr.eval(""));
     }
 }
