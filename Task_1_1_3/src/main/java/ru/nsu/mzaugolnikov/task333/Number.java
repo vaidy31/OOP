@@ -117,7 +117,7 @@ public class Number extends Expression {
     }
 
     /**
-     * Является ли числом
+     * Является ли числом.
      *
      * @param val число
      * @return true/false
