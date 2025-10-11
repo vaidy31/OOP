@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
 
 
 /**
@@ -22,7 +22,7 @@ class ExpressionTest {
         assertEquals(123.0, num.getValue());
 
         assertFalse(var.isNumber());
-        assertThrows(StrangeOperationException.class, var::getValue);
+        assertThrows(StrangeArgumentException.class, var::getValue);
     }
 
 }

@@ -2,7 +2,8 @@ package ru.nsu.mzaugolnikov.task333;
 
 import java.util.HashMap;
 import java.util.Map;
-import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
+
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
 
 /**
  * представляет переменную в математическом выражении.
@@ -40,7 +41,7 @@ public class Variable extends Expression {
         if (vars.containsKey(name)) {
             return vars.get(name);
         } else {
-            throw new StrangeOperationException(name + " is not defined");
+            throw new StrangeArgumentException(name + " is not defined");
         }
     }
 

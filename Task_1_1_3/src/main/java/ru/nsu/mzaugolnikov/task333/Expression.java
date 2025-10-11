@@ -1,6 +1,6 @@
 package ru.nsu.mzaugolnikov.task333;
 
-import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
 
 /**
  * Абстрактный класс для представления математического выражения.
@@ -52,7 +52,7 @@ public abstract class Expression {
      * @throws UnsupportedOperationException если выражение не является числом
      */
     public double getValue() {
-        throw new StrangeOperationException();
+        throw new StrangeArgumentException();
     }
 
     /**

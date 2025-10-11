@@ -11,4 +11,11 @@ public class StrangeArgumentException extends ExpresionExeption {
     public StrangeArgumentException() {
         super("Unexpected argument");
     }
+
+    /**
+     * Other.
+     */
+    public StrangeArgumentException(String message) {
+        super(message);
+    }
 }

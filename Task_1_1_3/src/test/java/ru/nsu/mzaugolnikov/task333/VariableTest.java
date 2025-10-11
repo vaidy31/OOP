@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
-import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 
 /**
  * Тест для VVariable.
@@ -33,7 +32,7 @@ class VariableTest {
     @Test
     public void testEvalUndefined() {
         Variable x = new Variable("x"); // da eto josko 0_0
-        Exception exception = assertThrows(StrangeOperationException.class, () -> {
+        Exception exception = assertThrows(StrangeArgumentException.class, () -> {
             x.eval("y=3");
         });
         assertTrue(exception.getMessage().contains("x is not defined"));
@@ -84,14 +83,14 @@ class VariableTest {
     @Test
     void testUndefinedVariable() {
         Variable x = new Variable("x");
-        assertThrows(StrangeOperationException.class, () -> x.eval("y=5"));
+        assertThrows(StrangeArgumentException.class, () -> x.eval("y=5"));
     }
 
     @Test
-    void testUndefinedVariableError() {
+    void testUndefinedVariableThrowsArgumentException() {
         Variable x = new Variable("x");
         Exception exception = assertThrows(StrangeArgumentException.class, () -> {
-            x.eval("y=5");
+            x.eval("y=5"); // x не задано
         });
         assertTrue(exception.getMessage().contains("x is not defined"));
     }
