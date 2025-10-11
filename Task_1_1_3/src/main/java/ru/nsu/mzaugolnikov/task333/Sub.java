@@ -52,19 +52,22 @@ public class Sub extends Expression {
     public Expression simplify() {
         Expression l = left.simplify();
         Expression r = right.simplify();
+        Number zero = new Number(0);
 
         // если обе части числа, вычисляем разность
         if (l.isNumber() && r.isNumber()) {
-            return new Number(l.getValue() - r.getValue());
+            Number ln = (Number) l;
+            Number rn = (Number) r;
+            return new Number(ln.getValue() - rn.getValue());
         }
 
         // x - 0 = x
-        if (r.isNumber() && r.getValue() == 0) {
+        if (r.isNumber() && r.equals(zero)) {
             return l;
         }
 
         // 0 - x = -x
-        if (l.isNumber() && l.getValue() == 0) {
+        if (l.isNumber() && l.equals(zero)) {
             return new Mult(new Number(-1), r);
         }
 

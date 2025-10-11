@@ -53,10 +53,10 @@ public class Add extends Expression {
         Expression rig = right.simplify();
         Number zero = new Number(0);
 
-        if (zero.equals(lef)) {
+        if (zero.equals(lef) && lef.isNumber()) {
             return rig;
         }
-        if (zero.equals(rig)) {
+        if (zero.equals(rig) && rig.isNumber()) {
             return lef;
         }
 

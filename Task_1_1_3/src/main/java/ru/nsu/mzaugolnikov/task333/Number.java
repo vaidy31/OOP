@@ -115,4 +115,14 @@ public class Number extends Expression {
     public int hashCode() {
         return Double.hashCode(value);
     }
+
+    /**
+     * Является ли числом
+     *
+     * @param val число
+     * @return true/false
+     */
+    public boolean isValue(double val) {
+        return Math.abs(value - val) < 1e-10;
+    }
 }

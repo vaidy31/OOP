@@ -58,14 +58,17 @@ public class Mult extends Expression {
             return new Number(lef.getValue() * rig.getValue());
         }
 
-        if ((lef.isNumber() && lef.getValue() == 0) || (rig.isNumber() && rig.getValue() == 0)) {
+        Number zero = new Number(0);
+        Number one = new Number(1);
+
+        if ((lef.isNumber() && lef.equals(zero)) || (rig.isNumber() && rig.equals(zero))) {
             return new Number(0);
         }
 
-        if (lef.isNumber() && lef.getValue() == 1) {
+        if (lef.isNumber() && lef.equals(one)) {
             return rig;
         }
-        if (rig.isNumber() && rig.getValue() == 1) {
+        if (rig.isNumber() && rig.equals(one)) {
             return lef;
         }
 

@@ -67,20 +67,19 @@ public class Div extends Expression {
 
         // если обе части числа, вычисляем результат
         if (c.isNumber() && z.isNumber()) {
-            double valueOfZ = z.getValue();
-            if (valueOfZ == 0) {
+            if (((Number) z).equals(new Number(0))) {
                 throw new DivisionByZeroException();
             }
-            return new Number(c.getValue() / valueOfZ);
+            return new Number(c.getValue() / ((Number) z).getValue());
         }
 
         // 0 / x = 0
-        if (c.isNumber() && c.getValue() == 0) {
+        if (c.isNumber() && c.equals(new Number(0))) {
             return new Number(0);
         }
 
         // x / 1 = x
-        if (z.isNumber() && z.getValue() == 1) {
+        if (z.isNumber() && z.equals(new Number(1))) {
             return c;
         }
 
