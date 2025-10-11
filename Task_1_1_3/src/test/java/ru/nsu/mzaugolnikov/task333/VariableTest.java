@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.mzaugolnikov.task333.exeptions.StrangeArgumentException;
 import ru.nsu.mzaugolnikov.task333.exeptions.StrangeOperationException;
 
 /**
@@ -84,5 +85,14 @@ class VariableTest {
     void testUndefinedVariable() {
         Variable x = new Variable("x");
         assertThrows(StrangeOperationException.class, () -> x.eval("y=5"));
+    }
+
+    @Test
+    void testUndefinedVariableError() {
+        Variable x = new Variable("x");
+        Exception exception = assertThrows(StrangeArgumentException.class, () -> {
+            x.eval("y=5");
+        });
+        assertTrue(exception.getMessage().contains("x is not defined"));
     }
 }
