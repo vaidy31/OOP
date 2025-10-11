@@ -67,10 +67,12 @@ public class Div extends Expression {
 
         // если обе части числа, вычисляем результат
         if (c.isNumber() && z.isNumber()) {
+            Number nc = (Number) c;
+            Number nz = (Number) z;
             if (((Number) z).equals(new Number(0))) {
                 throw new DivisionByZeroException();
             }
-            return new Number(c.getValue() / ((Number) z).getValue());
+            return new Number(nc.getValue() / nz.getValue());
         }
 
         // 0 / x = 0

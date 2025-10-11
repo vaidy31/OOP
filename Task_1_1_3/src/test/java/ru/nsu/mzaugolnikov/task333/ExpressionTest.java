@@ -19,10 +19,9 @@ class ExpressionTest {
         Expression var = new Variable("x");
 
         assertTrue(num.isNumber());
-        assertEquals(123.0, num.getValue());
+        assertEquals(123.0, ((Number) num).getValue());
 
         assertFalse(var.isNumber());
-        assertThrows(StrangeArgumentException.class, var::getValue);
     }
 
 }

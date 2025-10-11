@@ -73,7 +73,7 @@ class MultTest {
         Expression expr = new Mult(new Number(12), new Number(12));
         Expression simplified = expr.simplify();
         assertTrue(simplified.isNumber());
-        assertEquals(144.0, simplified.getValue());
+        assertEquals(144.0, ((Number) simplified).getValue());
     }
 
     @Test
@@ -81,7 +81,7 @@ class MultTest {
         Expression expr = new Mult(new Number(0), new Variable("y"));
         Expression simplified = expr.simplify();
         assertTrue(simplified.isNumber());
-        assertEquals(0.0, simplified.getValue());
+        assertEquals(0.0, ((Number) simplified).getValue());
     }
 
     @Test
@@ -89,7 +89,7 @@ class MultTest {
         Expression expr = new Mult(new Variable("y"), new Number(0));
         Expression simplified = expr.simplify();
         assertTrue(simplified.isNumber());
-        assertEquals(0.0, simplified.getValue());
+        assertEquals(0.0, ((Number) simplified).getValue());
     }
 
     @Test

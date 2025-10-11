@@ -55,7 +55,9 @@ public class Mult extends Expression {
         Expression rig = right.simplify();
 
         if (lef.isNumber() && rig.isNumber()) {
-            return new Number(lef.getValue() * rig.getValue());
+            Number nl = (Number) lef;
+            Number nr = (Number) rig;
+            return new Number(nl.getValue() * nr.getValue());
         }
 
         Number zero = new Number(0);

@@ -44,10 +44,10 @@ class VariableTest {
         Variable y = new Variable("y");
         Expression dx = x.derivative("x");
         assertTrue(dx.isNumber());
-        assertEquals(1.0, dx.getValue());
+        assertEquals(1.0, ((Number) dx).getValue());
         Expression dy = x.derivative("y");
         assertTrue(dy.isNumber());
-        assertEquals(0.0, dy.getValue());
+        assertEquals(0.0, ((Number) dy).getValue());
     }
 
     @Test
@@ -77,7 +77,7 @@ class VariableTest {
     public void testMoreLettersDerivative() {
         Variable delta = new Variable("delta");
         Expression deltaX = delta.derivative("delta");
-        assertEquals(1.0, deltaX.getValue());
+        assertEquals(1.0, ((Number) deltaX).getValue());
     }
 
     @Test

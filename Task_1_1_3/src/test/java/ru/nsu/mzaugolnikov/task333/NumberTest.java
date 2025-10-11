@@ -23,7 +23,7 @@ public class NumberTest {
         Number n = new Number(2222220);
         Expression deriv = n.derivative("x");
         assertTrue(deriv.isNumber());
-        assertEquals(0.0, deriv.getValue());
+        assertEquals(0.0, ((Number) deriv).getValue());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class NumberTest {
         Number n = new Number(4.2);
         Expression clone = n.clone();
         assertNotSame(n, clone);
-        assertEquals(n.getValue(), clone.getValue());
+        assertEquals(n.getValue(), ((Number) clone).getValue());
     }
 
     @Test

@@ -46,16 +46,6 @@ public abstract class Expression {
     }
 
     /**
-     * Возвращает значение выражения, если это число.
-     *
-     * @return значение числа
-     * @throws UnsupportedOperationException если выражение не является числом
-     */
-    public double getValue() {
-        throw new StrangeArgumentException();
-    }
-
-    /**
      * isVariable or not.
      *
      * @return false

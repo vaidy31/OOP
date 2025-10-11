@@ -14,7 +14,7 @@ class ExpressionParserTest {
         Expression n = ExpressionParser.parse("123123");
         Expression v = ExpressionParser.parse("x");
         assertTrue(n.isNumber());
-        assertEquals(123123, n.getValue());
+        assertEquals(123123, ((Number) n).getValue());
         assertEquals("x", v.toString());
     }
 
