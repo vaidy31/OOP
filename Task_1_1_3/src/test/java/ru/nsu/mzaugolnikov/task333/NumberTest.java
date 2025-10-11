@@ -1,6 +1,8 @@
 package ru.nsu.mzaugolnikov.task333;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -66,5 +68,22 @@ public class NumberTest {
         Number n1 = new Number(3.0);
         Number n2 = new Number(3.00000000002);
         assertEquals(n1, n2);
+    }
+
+    @Test
+    void testHashCode() {
+        Number num1 = new Number(5.0);
+        Number num2 = new Number(5.0);
+        assertEquals(num1.hashCode(), num2.hashCode());
+
+        Number num3 = new Number(7.0);
+        assertNotEquals(num1.hashCode(), num3.hashCode());
+    }
+
+    @Test
+    void testIsValue() {
+        Number num = new Number(3.0);
+        assertTrue(num.isValue(3.0000000001));
+        assertFalse(num.isValue(2.9));
     }
 }

@@ -2,7 +2,6 @@ package ru.nsu.mzaugolnikov.task333;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +21,12 @@ class ExpressionTest {
         assertEquals(123.0, ((Number) num).getValue());
 
         assertFalse(var.isNumber());
+    }
+
+    @Test
+    void testIsVariableInNumberClass() {
+        Expression num = new Number(42.0);
+        assertFalse(num.isVariable());
     }
 
 }
