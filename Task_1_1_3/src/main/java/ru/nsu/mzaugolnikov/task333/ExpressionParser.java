@@ -1,5 +1,7 @@
 package ru.nsu.mzaugolnikov.task333;
 
+import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeOperationException;
+
 /**
  * Преобразование строк в математические выражения.
  */
@@ -71,7 +73,7 @@ public class ExpressionParser {
         try {
             double val = Double.parseDouble(s);
             return new Number(val);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return new Variable(s);
         }
     }

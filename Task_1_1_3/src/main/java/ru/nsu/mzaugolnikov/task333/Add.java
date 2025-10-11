@@ -51,11 +51,12 @@ public class Add extends Expression {
     public Expression simplify() {
         Expression lef = left.simplify();
         Expression rig = right.simplify();
+        Number zero = new Number(0);
 
-        if (lef instanceof Number && ((Number) lef).eval("") == 0) {
+        if (zero.equals(lef)) {
             return rig;
         }
-        if (rig instanceof Number && ((Number) rig).eval("") == 0) {
+        if (zero.equals(rig)) {
             return lef;
         }
 

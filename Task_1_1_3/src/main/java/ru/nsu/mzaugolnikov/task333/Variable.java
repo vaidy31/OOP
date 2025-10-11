@@ -1,5 +1,11 @@
 package ru.nsu.mzaugolnikov.task333;
 
+import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeArgumentException;
+import ru.nsu.mzaugolnikov.task333.Exeptions.StrangeOperationException;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * представляет переменную в математическом выражении.
  */
@@ -22,18 +28,22 @@ public class Variable extends Expression {
      * Вычисляет значения переменной по строке.
      *
      * @param values значение переменной.
-     * @return кидаем IlliargExecption если переменной нет
+     * @return кидаем StrangeOperationException если переменной нет
      */
     @Override
     public double eval(String values) {
-        String[] pairsOfValues = values.split(";");
-        for (String pair : pairsOfValues) {
-            String[] valsAndSigns = pair.trim().split("=");
-            if (valsAndSigns.length == 2 && valsAndSigns[0].trim().equals(name)) {
-                return Double.parseDouble(valsAndSigns[1].trim());
+        Map<String, Double> vars = new HashMap<>();
+        for (String pair : values.split(";")) {
+            String[] kv = pair.trim().split("=");
+            if (kv.length == 2) {
+                vars.put(kv[0].trim(), Double.parseDouble(kv[1].trim()));
             }
         }
-        throw new IllegalArgumentException("Variable " + name + " is not defined");
+        if (vars.containsKey(name)) {
+            return vars.get(name);
+        } else {
+            throw new StrangeOperationException(name + " is not defined");
+        }
     }
 
     /**

@@ -8,6 +8,15 @@ public class Number extends Expression {
     private final double value;
 
     /**
+     * Возвращает значение числа.
+     *
+     * @return числовое значение
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
      * Конструктор для создания числа.
      *
      * @param value числовое значение
@@ -79,13 +88,31 @@ public class Number extends Expression {
     }
 
     /**
-     * Возвращает значение числа.
+     * Сравнивает это число с другим объектом.
      *
-     * @return числовое значение
+     * @param obj объект для сравнения
+     * @return true/false
      */
     @Override
-    public double getValue() {
-        return value;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Number other = (Number) obj;
+        return Math.abs(this.value - other.value) < 1e-10; // для случаев с 3.00000000000004
     }
 
+    /**
+     * Возвращает хэш-код числа.
+     * Переопределяем для того, чтобы сравнивать значения чисел в equals, а не их хэшкод
+     *
+     * @return хэш-код
+     */
+    @Override
+    public int hashCode() {
+        return Double.hashCode(value);
+    }
 }

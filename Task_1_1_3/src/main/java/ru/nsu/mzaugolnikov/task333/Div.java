@@ -1,5 +1,7 @@
 package ru.nsu.mzaugolnikov.task333;
 
+import ru.nsu.mzaugolnikov.task333.Exeptions.DivisionByZeroException;
+
 /**
  * Класс для деления.
  */
@@ -30,7 +32,7 @@ public class Div extends Expression {
     public double eval(String values) {
         double znamVal = znamenatel.eval(values);
         if (znamVal == 0) {
-            throw new ArithmeticException("Division by zero");
+            throw new DivisionByZeroException();
         }
         return chislitel.eval(values) / znamVal;
     }
@@ -67,7 +69,7 @@ public class Div extends Expression {
         if (c.isNumber() && z.isNumber()) {
             double valueOfZ = z.getValue();
             if (valueOfZ == 0) {
-                throw new ArithmeticException("Division by zero");
+                throw new DivisionByZeroException();
             }
             return new Number(c.getValue() / valueOfZ);
         }
