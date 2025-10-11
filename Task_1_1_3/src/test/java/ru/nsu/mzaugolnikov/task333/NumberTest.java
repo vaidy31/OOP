@@ -54,4 +54,17 @@ public class NumberTest {
         assertTrue(n.isNumber());
         assertEquals(1.0, n.getValue());
     }
+
+    @Test
+    void testEqualsSameObject() {
+        Number num = new Number(5.0);
+        assertEquals(num, num);
+    }
+
+    @Test
+    void testEqualsWithStrangeSituation() {
+        Number n1 = new Number(3.0);
+        Number n2 = new Number(3.00000000002);
+        assertEquals(n1, n2);
+    }
 }

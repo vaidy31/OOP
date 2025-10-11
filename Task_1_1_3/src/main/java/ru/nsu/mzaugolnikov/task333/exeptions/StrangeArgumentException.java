@@ -6,13 +6,6 @@ package ru.nsu.mzaugolnikov.task333.exeptions;
 public class StrangeArgumentException extends ExpresionExeption {
 
     /**
-     * Непредвиденный поведение с аргументом.
-     */
-    public StrangeArgumentException() {
-        super("Unexpected argument");
-    }
-
-    /**
      * Other.
      */
     public StrangeArgumentException(String message) {
