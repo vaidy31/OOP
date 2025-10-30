@@ -12,15 +12,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 /**
- * Реализация графа через список смежности
+ * Реализация графа через список смежности.
  */
 public class AdjacencyListGraph implements Graph {
-    /** Список смежности: вершина -> список соседей */
+    /** Список смежности: вершина -> список соседей. */
     private Map<Integer, List<Integer>> adjList = new HashMap<>();
-    /** Множество всех вершин */
+    /** Множество всех вершин. */
     private Set<Integer> vertexSet = new HashSet<>();
-    /** Общее количество вершин в графе */
+    /** Общее количество вершин в графе. */
 
     @Override
     public void addVertex(Integer v) {
@@ -68,8 +69,9 @@ public class AdjacencyListGraph implements Graph {
 
 
     /**
-     * Читает граф из файла
-     * @param file путь к файлу
+     * Читает граф из файла.
+     *
+     * @param file файл
      * @throws IOException при ошибках чтения
      */
     @Override

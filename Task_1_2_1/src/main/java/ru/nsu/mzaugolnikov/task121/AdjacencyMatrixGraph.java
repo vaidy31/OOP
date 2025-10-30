@@ -12,22 +12,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 /**
- * Реализация интерфейса через матрицу смежности
+ * Реализация интерфейса через матрицу смежности.
  */
 public class AdjacencyMatrixGraph implements Graph{
-    /** Матрица смежности графа */
+    /** Матрица смежности графа. */
     private int[][] Graph;
-    /** Сопоставление индексов массива с идентификаторами вершин */
+    /** Сопоставление индексов массива с идентификаторами вершин. */
     private final List<Integer> indexToVertex = new ArrayList<>();
-    /** Сопоставление идентификаторов вершин с индексами в массиве */
+    /** Сопоставление идентификаторов вершин с индексами в массиве. */
     private final Map<Integer, Integer> vertexMap;
 
     public AdjacencyMatrixGraph() {
         vertexMap = new HashMap<>();
     }
     /**
-     * Добавляет вершину в граф
+     * Добавляет вершину в граф.
+     *
      * @param v идентификатор добавляемой вершины
      */
     @Override
@@ -47,7 +49,8 @@ public class AdjacencyMatrixGraph implements Graph{
 
 
     /**
-     * Удаляет вершину из графа
+     * Удаляет вершину из графа.
+     *
      * @param v идентификатор удаляемой вершины
      */
     @Override
@@ -76,7 +79,8 @@ public class AdjacencyMatrixGraph implements Graph{
 
 
     /**
-     * Добавляет направленное ребро
+     * Добавляет направленное ребро.
+     *
      * @param from начальная вершина
      * @param to конечная вершина
      */
@@ -100,7 +104,8 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     /**
-     * Удаляет ребро между вершинами
+     * Удаляет ребро между вершинами.
+     *
      * @param from начальная вершина
      * @param to конечная вершина
      */
@@ -115,7 +120,8 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     /**
-     * Возвращает список смежных вершин
+     * Возвращает список смежных вершин.
+     *
      * @param v исходная вершина
      * @return список смежных вершин
      */
@@ -137,7 +143,8 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     /**
-     * Читает граф из файла
+     * Читает граф из файла.
+     *
      * @param file путь к файлу
      * @throws IOException при ошибках чтения
      */
@@ -212,7 +219,8 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     /**
-     * Возвращает строковое представление графа
+     * Возвращает строковое представление графа.
+     *
      * @return строковое представление
      */
     @Override
@@ -236,7 +244,8 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     /**
-     * Вычисляет хеш-код графа
+     * Вычисляет хеш-код графа.
+     * 
      * @return хеш-код
      */
     @Override

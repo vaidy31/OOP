@@ -198,7 +198,8 @@ public class IncidenceMatrixGraph implements Graph{
 
 
     /**
-     * Читает граф из файла
+     * Читает граф из файла.
+     *
      * @param file путь к файлу
      * @throws IOException при ошибках чтения
      */
@@ -259,7 +260,8 @@ public class IncidenceMatrixGraph implements Graph{
         }
     }
     /**
-     * Возвращает строковое представление графа
+     * Возвращает строковое представление графа.
+     *
      * @return строковое представление
      */
     @Override
