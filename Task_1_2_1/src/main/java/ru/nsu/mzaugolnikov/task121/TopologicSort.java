@@ -1,6 +1,12 @@
 package ru.nsu.mzaugolnikov.task121;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TopologicSort {
     public static List<Integer> topSort(Graph g) {
@@ -41,7 +47,7 @@ public class TopologicSort {
 
     private static Set<Integer> collectVertices(AdjacencyListGraph g) {
         Set<Integer> allVertices = new HashSet<>();
-        for (Integer v : g.vertexSet()) {      // <-- здесь реальные вершины графа
+        for (Integer v : g.vertexSet()) {
             allVertices.add(v);
             allVertices.addAll(g.adjVertexList(v));
         }
