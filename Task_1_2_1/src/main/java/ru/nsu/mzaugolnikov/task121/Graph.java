@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Интерфейс для графа.
+ */
 public interface Graph {
 
     /**

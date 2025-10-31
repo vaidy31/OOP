@@ -195,7 +195,8 @@ public class AdjacencyMatrixGraph implements Graph {
                     continue;
                 }
 
-                int fromVert, toVert;
+                int fromVert;
+                int toVert;
                 try {
                     fromVert = Integer.parseInt(verteciesInString[0]);
                     toVert = Integer.parseInt(verteciesInString[1]);
@@ -204,8 +205,9 @@ public class AdjacencyMatrixGraph implements Graph {
                     continue;
                 }
 
-                if (fromVert < 0 ||toVert < 0){
-                    System.err.println("Нестандартный номер вершины в строке " + numString + "пропускаем...");
+                if (fromVert < 0 || toVert < 0){
+                    System.err.println("Нестандартный номер вершины в строке "
+                            + numString + "пропускаем...");
                     continue;
                 }
 
@@ -213,7 +215,8 @@ public class AdjacencyMatrixGraph implements Graph {
             }
 
             if (countVertexLocal > countVertexGlobal && countVertexGlobal > 0) {
-                System.out.println("Количество вершин в начале файле было указано неверно, размеры были увеличены");
+                System.out.println("Количество вершин в начале файле было"
+                        + "указано неверно, размеры были увеличены");
             }
         } catch (NumberFormatException e) {
             System.err.println("Проблема формата в строке " + numString);
@@ -252,7 +255,8 @@ public class AdjacencyMatrixGraph implements Graph {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(indexToVertex, vertexMap, Arrays.deepHashCode(graph));
+        return Objects.hash(indexToVertex,
+                    vertexMap, Arrays.deepHashCode(graph));
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Реализация графа через матрицу инцидентности.
  */
-public class IncidenceMatrixGraph implements Graph{
+public class IncidenceMatrixGraph implements Graph {
     private int[][] matrix; // матрица индцедентности 1 ребро 0 нет
     Map<Integer, Integer> vertexMapForIndex; // вершина в индекс строки матрицы
     private int countVertexGlobal; // количество вершин
@@ -24,12 +24,16 @@ public class IncidenceMatrixGraph implements Graph{
     private static class Edge {
         int from;
         int to;
+
         Edge(int from, int to) {
             this.from = from;
             this.to = to;
         }
     }
 
+    /**
+     * Конструктор.
+     */
     public IncidenceMatrixGraph() {
         vertexMapForIndex = new HashMap<>();
         matrix = new int[0][0];
@@ -44,7 +48,12 @@ public class IncidenceMatrixGraph implements Graph{
             updateCapacity(countVertexGlobal);
         }
     }
-    
+
+    /**
+     * Увлечивает размер матрицы.
+     *
+     * @param requiredSize размер для увелечения
+     */
     public void updateCapacity(int requiredSize) {
         if (matrix == null) {
             matrix = new int[requiredSize][requiredSize];
@@ -77,7 +86,7 @@ public class IncidenceMatrixGraph implements Graph{
 
         for (int i = edgesToRemove.size() - 1; i >= 0; i--) {
             Edge edge = edgesToRemove.get(i);
-                deleteEdge(edge.from, edge.to);
+            deleteEdge(edge.from, edge.to);
         }
 
         if (countVertexGlobal > 1) {
@@ -229,21 +238,25 @@ public class IncidenceMatrixGraph implements Graph{
                     numString++;
 
                     if (verteciesInString.length != 2) {
-                        System.err.println("Нестандартное количество вершин в строке " + numString);
+                        System.err.println("Нестандартное количество вершин в строке "
+                                + numString);
                         continue;
                     }
 
-                    int fromVert, toVert;
+                    int fromVert
+                    int toVert;
                     try {
                         fromVert = Integer.parseInt(verteciesInString[0]);
                         toVert = Integer.parseInt(verteciesInString[1]);
                     } catch (NumberFormatException e) {
-                        System.err.println("Проблема формата в строке " + numString);
+                        System.err.println("Проблема формата в строке "
+                                + numString);
                         continue;
                     }
 
                     if (fromVert < 0 || toVert < 0) {
-                        System.err.println("Нестандартный номер вершины в строке " + numString + "пропускаем...");
+                        System.err.println("Нестандартный номер вершины в строке "
+                                + numString + "пропускаем...");
                         continue;
                     }
 
@@ -251,16 +264,18 @@ public class IncidenceMatrixGraph implements Graph{
                 }
 
                 if (this.countVertexGlobal > declaredVertexCount) {
-                    System.out.println("Количество вершин в начале файле было указано неверно, размеры были увеличены");
+                    System.out.println("Количество вершин в начале файле было"
+                            + "указано неверно, размеры были увеличены");
                 }
 
             } catch (NumberFormatException e) {
-                System.err.println("Первая строка не содержит число вершин —" +
-                        "граф строится по факту появления вершин из ребер.");
+                System.err.println("Первая строка не содержит число вершин —"
+                        + "граф строится по факту появления вершин из ребер.");
             }
 
         }
     }
+
     /**
      * Возвращает строковое представление графа.
      *

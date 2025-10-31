@@ -120,7 +120,8 @@ public class AdjacencyListGraph implements Graph {
                     continue;
                 }
 
-                int fromVert, toVert;
+                int fromVert;
+                int toVert;
                 try {
                     fromVert = Integer.parseInt(verteciesInString[0]);
                     toVert = Integer.parseInt(verteciesInString[1]);
@@ -129,7 +130,7 @@ public class AdjacencyListGraph implements Graph {
                     continue;
                 }
 
-                if (fromVert < 0 ||toVert < 0){
+                if (fromVert < 0 || toVert < 0) {
                     System.err.println("Нестандартный номер вершины в строке "
                             + numString + "пропускаем...");
                     continue;
