@@ -45,4 +45,13 @@ class IncidenceMatrixGraphTest {
 
         tempFile.delete();
     }
+
+    @Test
+    void testEquals_SameObject() {
+        IncidenceMatrixGraph graph = new IncidenceMatrixGraph();
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+
+        assertTrue(graph.equals(graph));
+    }
 }

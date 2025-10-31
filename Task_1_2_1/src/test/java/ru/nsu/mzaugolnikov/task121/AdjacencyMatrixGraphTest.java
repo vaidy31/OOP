@@ -41,4 +41,13 @@ class AdjacencyMatrixGraphTest {
 
         tempFile.delete();
     }
+
+    @Test
+    void testEquals_SameObject() {
+        AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+
+        assertTrue(graph.equals(graph));
+    }
 }

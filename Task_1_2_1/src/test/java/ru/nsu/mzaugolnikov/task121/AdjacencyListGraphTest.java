@@ -38,4 +38,13 @@ class AdjacencyListGraphTest {
 
         tempFile.delete();
     }
+
+    @Test
+    void testEquals_SameObject() {
+        AdjacencyListGraph graph = new AdjacencyListGraph();
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+
+        assertTrue(graph.equals(graph));
+    }
 }
