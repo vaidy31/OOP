@@ -1,5 +1,7 @@
 package ru.nsu.mzaugolnikov.task121;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TopologicSortTest {
 
-    public static void main(String[] args) throws IOException {
+    @Test
+    void testTopologicSort() throws IOException {
         // Создаем временный файл с графом
         File tempFile = File.createTempFile("graph_goidatest", ".txt");
         try (FileWriter wr = new FileWriter(tempFile)) {
