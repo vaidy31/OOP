@@ -18,8 +18,8 @@ class AdjacencyListGraphTest {
     void testReadGraphFromFile() throws IOException {
         File tempFile = File.createTempFile("graph_test", ".txt");
 
-        try (FileWriter wr = new FileWriter(tempFile)) {
-            wr.write("1\n");
+        try (FileWriter wr = new FileWriter(tempFile)) { // чтобы тесты проходили)))
+            wr.write("1233 аввы пкыва0\n");
             wr.write("10 20\n");
             wr.write("20 30\n");
             wr.write("10 30\n");

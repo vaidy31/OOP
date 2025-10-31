@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
- * Тест для сортировки алгоритмом Кана
+ * Тест для сортировки алгоритмом Кана.
  */
 public class TopologicSortTest {
 
