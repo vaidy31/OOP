@@ -205,7 +205,7 @@ public class AdjacencyMatrixGraph implements Graph {
                     continue;
                 }
 
-                if (fromVert < 0 || toVert < 0){
+                if (fromVert < 0 || toVert < 0) {
                     System.err.println("Нестандартный номер вершины в строке "
                             + numString + "пропускаем...");
                     continue;
