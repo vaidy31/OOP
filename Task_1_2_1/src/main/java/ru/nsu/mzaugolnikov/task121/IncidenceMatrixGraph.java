@@ -12,8 +12,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Реализация графа через матрицу инцидентности.
+ */
 public class IncidenceMatrixGraph implements Graph{
-    private int[][] Matrix; // матрица индцедентности 1 ребро 0 нет
+    private int[][] matrix; // матрица индцедентности 1 ребро 0 нет
     Map<Integer, Integer> vertexMapForIndex; // вершина в индекс строки матрицы
     private int countVertexGlobal; // количество вершин
     private List<Edge> edges = new ArrayList<>(); // для ребер
@@ -29,7 +32,7 @@ public class IncidenceMatrixGraph implements Graph{
 
     public IncidenceMatrixGraph() {
         vertexMapForIndex = new HashMap<>();
-        Matrix = new int[0][0];
+        matrix = new int[0][0];
         countVertexGlobal = 0;
     }
 
@@ -43,17 +46,17 @@ public class IncidenceMatrixGraph implements Graph{
     }
     
     public void updateCapacity(int requiredSize) {
-        if (Matrix == null) {
-            Matrix = new int[requiredSize][requiredSize];
+        if (matrix == null) {
+            matrix = new int[requiredSize][requiredSize];
             return;
         }
-        if (requiredSize > Matrix.length) {
-            int newSize = Math.max(Matrix.length * 2, requiredSize);
+        if (requiredSize > matrix.length) {
+            int newSize = Math.max(matrix.length * 2, requiredSize);
             int[][] newMatrix = new int[newSize][newSize];
-            for (int i = 0; i < Matrix.length; i++) {
-                System.arraycopy(Matrix[i], 0, newMatrix[i], 0, Matrix[i].length);
+            for (int i = 0; i < matrix.length; i++) {
+                System.arraycopy(matrix[i], 0, newMatrix[i], 0, matrix[i].length);
             }
-            Matrix = newMatrix;
+            matrix = newMatrix;
         }
     }
 
@@ -79,20 +82,20 @@ public class IncidenceMatrixGraph implements Graph{
 
         if (countVertexGlobal > 1) {
             int newRowCount = countVertexGlobal - 1;
-            int colCount = Matrix[0].length;
+            int colCount = matrix[0].length;
             int[][] newMatrix = new int[newRowCount][colCount];
             int newRow = 0;
             for (int oldRow = 0; oldRow < countVertexGlobal; oldRow++) {
                 if (oldRow == indexToRemove) {
                     continue;
                 }
-                System.arraycopy(Matrix[oldRow], 0, newMatrix[newRow], 0, colCount);
+                System.arraycopy(matrix[oldRow], 0, newMatrix[newRow], 0, colCount);
                 newRow++;
             }
 
-            Matrix = newMatrix;
+            matrix = newMatrix;
         } else {
-            Matrix = new int[0][0];
+            matrix = new int[0][0];
             edges.clear();
         }
         vertexMapForIndex.remove(v);
@@ -120,18 +123,18 @@ public class IncidenceMatrixGraph implements Graph{
         }
 
         int maxIndex = Math.max(vertexMapForIndex.get(from), vertexMapForIndex.get(to));
-        if (Matrix.length <= maxIndex) {
+        if (matrix.length <= maxIndex) {
             updateCapacity(maxIndex + 1);
         }
 
-        int oldCols = (Matrix.length > 0) ? Matrix[0].length : 0;
+        int oldCols = (matrix.length > 0) ? matrix[0].length : 0;
         int newCols = oldCols + 1;
 
-        int[][] newMatrix = new int[Matrix.length][newCols];
+        int[][] newMatrix = new int[matrix.length][newCols];
 
-        for (int i = 0; i < Matrix.length; i++) {
-            for (int j = 0; j < Matrix[i].length; j++) {
-                newMatrix[i][j] = Matrix[i][j];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                newMatrix[i][j] = matrix[i][j];
             }
         }
         int fromIndex = vertexMapForIndex.get(from);
@@ -139,7 +142,7 @@ public class IncidenceMatrixGraph implements Graph{
         newMatrix[fromIndex][newCols - 1] = -1;
         newMatrix[toIndex][newCols - 1] = 1;
 
-        Matrix = newMatrix;
+        matrix = newMatrix;
         edges.add(new Edge(from, to));
         return addedVertices;
     }
@@ -159,7 +162,7 @@ public class IncidenceMatrixGraph implements Graph{
             return;
         }
 
-        int tempColsOld = Matrix[0].length;
+        int tempColsOld = matrix[0].length;
         int tempColsNew = tempColsOld - 1;
 
         int[][] newMatrix = new int[countVertexGlobal][tempColsNew];
@@ -170,10 +173,10 @@ public class IncidenceMatrixGraph implements Graph{
                 if (j == tempInd) {
                     continue;
                 }
-                newMatrix[i][temp++] = Matrix[i][j];
+                newMatrix[i][temp++] = matrix[i][j];
             }
         }
-        Matrix = newMatrix;
+        matrix = newMatrix;
         edges.remove(tempInd);
     }
 
@@ -252,7 +255,8 @@ public class IncidenceMatrixGraph implements Graph{
                 }
 
             } catch (NumberFormatException e) {
-                System.err.println("Первая строка не содержит число вершин — граф строится по факту появления вершин из ребер.");
+                System.err.println("Первая строка не содержит число вершин —" +
+                        "граф строится по факту появления вершин из ребер.");
             }
 
         }

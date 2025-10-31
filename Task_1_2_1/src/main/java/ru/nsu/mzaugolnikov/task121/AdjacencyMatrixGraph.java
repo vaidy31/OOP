@@ -16,9 +16,9 @@ import java.util.Set;
 /**
  * Реализация интерфейса через матрицу смежности.
  */
-public class AdjacencyMatrixGraph implements Graph{
+public class AdjacencyMatrixGraph implements Graph {
     /** Матрица смежности графа. */
-    private int[][] Graph;
+    private int[][] graph;
     /** Сопоставление индексов массива с идентификаторами вершин. */
     private final List<Integer> indexToVertex = new ArrayList<>();
     /** Сопоставление идентификаторов вершин с индексами в массиве. */
@@ -27,6 +27,7 @@ public class AdjacencyMatrixGraph implements Graph{
     public AdjacencyMatrixGraph() {
         vertexMap = new HashMap<>();
     }
+
     /**
      * Добавляет вершину в граф.
      *
@@ -39,7 +40,7 @@ public class AdjacencyMatrixGraph implements Graph{
         }
         if (!vertexMap.containsKey(v)) {
             int newIndex = indexToVertex.size();
-            if (Graph == null || newIndex >= Graph.length) {
+            if (graph == null || newIndex >= graph.length) {
                 updateCapacity(newIndex + 1);
             }
             vertexMap.put(v, newIndex);
@@ -62,17 +63,17 @@ public class AdjacencyMatrixGraph implements Graph{
         int lastIndex = indexToVertex.size() - 1;
         Integer lastVertex = indexToVertex.get(lastIndex);
         if (index != lastIndex) {
-            for (int i = 0; i < Graph.length; i++) {
-                Graph[index][i] = Graph[lastIndex][i];
-                Graph[i][index] = Graph[i][lastIndex];
+            for (int i = 0; i < graph.length; i++) {
+                graph[index][i] = graph[lastIndex][i];
+                graph[i][index] = graph[i][lastIndex];
             }
             vertexMap.put(lastVertex, index);
             indexToVertex.set(index, lastVertex);
         }
 
-        for (int i = 0; i < Graph.length; i++) {
-            Graph[lastIndex][i] = 0;
-            Graph[i][lastIndex] = 0;
+        for (int i = 0; i < graph.length; i++) {
+            graph[lastIndex][i] = 0;
+            graph[i][lastIndex] = 0;
         }
         indexToVertex.remove(lastIndex);
     }
@@ -99,7 +100,7 @@ public class AdjacencyMatrixGraph implements Graph{
             toIndex = vertexMap.get(to);
             count++;
         }
-        Graph[fromIndex][toIndex] = 1;
+        graph[fromIndex][toIndex] = 1;
         return count;
     }
 
@@ -116,7 +117,7 @@ public class AdjacencyMatrixGraph implements Graph{
         if (fromIndex == null || toIndex == null) {
             return;
         }
-        Graph[fromIndex][toIndex] = 0;
+        graph[fromIndex][toIndex] = 0;
     }
 
     /**
@@ -135,7 +136,7 @@ public class AdjacencyMatrixGraph implements Graph{
 
         for (int i = 0; i < indexToVertex.size(); i++) {
             Integer u = indexToVertex.get(i);
-            if (u != null && Graph[index][i] != 0) {
+            if (u != null && graph[index][i] != 0) {
                 neighbors.add(u);
             }
         }
@@ -167,7 +168,8 @@ public class AdjacencyMatrixGraph implements Graph{
             try {
                 countVertexGlobal = Integer.parseInt(initLine);
             } catch (NumberFormatException e) {
-                System.out.println("Первая строка не содержит число вершин — граф строится по факту появления вершин из ребер.");
+                System.out.println("Первая строка не содержит число вершин — "
+                        + "граф строится по факту появления вершин из ребер.");
                 countVertexGlobal = 0;
 
                 // Добавляем обработку этой строки как ребра:
@@ -234,7 +236,7 @@ public class AdjacencyMatrixGraph implements Graph{
             sb.append(v).append(": ");
             for (int j = 0; j < indexToVertex.size(); j++) {
                 Integer u = indexToVertex.get(j);
-                if (u != null && Graph[i][j] != 0) {
+                if (u != null && graph[i][j] != 0) {
                     sb.append(u).append(" ");
                 }
             }
@@ -250,7 +252,7 @@ public class AdjacencyMatrixGraph implements Graph{
      */
     @Override
     public int hashCode() {
-        return Objects.hash(indexToVertex, vertexMap, Arrays.deepHashCode(Graph));
+        return Objects.hash(indexToVertex, vertexMap, Arrays.deepHashCode(graph));
     }
 
     @Override
@@ -264,21 +266,21 @@ public class AdjacencyMatrixGraph implements Graph{
         AdjacencyMatrixGraph other = (AdjacencyMatrixGraph) obj;
         return Objects.equals(indexToVertex, other.indexToVertex)
                 && Objects.equals(vertexMap, other.vertexMap)
-                && Arrays.deepEquals(this.Graph, other.Graph);
+                && Arrays.deepEquals(this.graph, other.graph);
     }
 
     private void updateCapacity(int requiredSize) {
-        if (Graph == null) {
-            Graph = new int[requiredSize][requiredSize];
+        if (graph == null) {
+            graph = new int[requiredSize][requiredSize];
             return;
         }
-        if (requiredSize > Graph.length) {
-            int newSize = Math.max(Graph.length * 2, requiredSize);
+        if (requiredSize > graph.length) {
+            int newSize = Math.max(graph.length * 2, requiredSize);
             int[][] newGraph = new int[newSize][newSize];
-            for (int i = 0; i < Graph.length; i++) {
-                System.arraycopy(Graph[i], 0, newGraph[i], 0, Graph[i].length);
+            for (int i = 0; i < graph.length; i++) {
+                System.arraycopy(graph[i], 0, newGraph[i], 0, graph[i].length);
             }
-            Graph = newGraph;
+            graph = newGraph;
         }
     }
 
