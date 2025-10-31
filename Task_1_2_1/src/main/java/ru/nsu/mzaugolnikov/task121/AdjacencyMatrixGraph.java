@@ -245,7 +245,7 @@ public class AdjacencyMatrixGraph implements Graph{
 
     /**
      * Вычисляет хеш-код графа.
-     * 
+     *
      * @return хеш-код
      */
     @Override

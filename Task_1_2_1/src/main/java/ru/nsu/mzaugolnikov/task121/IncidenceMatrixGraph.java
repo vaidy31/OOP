@@ -74,7 +74,7 @@ public class IncidenceMatrixGraph implements Graph{
 
         for (int i = edgesToRemove.size() - 1; i >= 0; i--) {
             Edge edge = edgesToRemove.get(i);
-            deleteEdge(edge.from, edge.to);
+                deleteEdge(edge.from, edge.to);
         }
 
         if (countVertexGlobal > 1) {
@@ -96,7 +96,6 @@ public class IncidenceMatrixGraph implements Graph{
             edges.clear();
         }
         vertexMapForIndex.remove(v);
-
         Map<Integer, Integer> newVertexMap = new HashMap<>();
         int newIndex = 0;
         for (Integer vertex : vertexMapForIndex.keySet()) {
@@ -104,7 +103,6 @@ public class IncidenceMatrixGraph implements Graph{
             newIndex++;
         }
         vertexMapForIndex = newVertexMap;
-
         countVertexGlobal--;
     }
 
@@ -295,10 +293,13 @@ public class IncidenceMatrixGraph implements Graph{
         IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
 
         Set<String> thisEdges = new HashSet<>();
-        for (Edge e : edges) thisEdges.add(e.from + "->" + e.to);
-
+        for (Edge e : edges) {
+            thisEdges.add(e.from + "->" + e.to);
+        }
         Set<String> otherEdges = new HashSet<>();
-        for (Edge e : other.edges) otherEdges.add(e.from + "->" + e.to);
+        for (Edge e : other.edges) {
+            otherEdges.add(e.from + "->" + e.to);
+        }
 
         return Objects.equals(vertexMapForIndex.keySet(), other.vertexMapForIndex.keySet())
                 && Objects.equals(thisEdges, otherEdges);

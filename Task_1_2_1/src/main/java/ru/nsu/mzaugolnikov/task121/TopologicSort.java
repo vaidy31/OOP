@@ -1,58 +1,61 @@
 package ru.nsu.mzaugolnikov.task121;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+/**
+ * Топологическая сортировка методом Кана через методы графа.
+ */
 public class TopologicSort {
-    public static List<Integer> topSort(Graph g) {
-        Set<Integer> allVertices = g.vertexSet();
 
-        if (allVertices.isEmpty()) return new ArrayList<>();
+    /**
+     * Выполняет топологическую сортировку графа.
+     *
+     * @param g граф
+     * @return список вершин в топологическом порядке
+     * @throws IllegalArgumentException если граф содержит цикл
+     */
+    public static List<Integer> sort(Graph g) {
+        List<Integer> sorted = new ArrayList<>();
+        Set<Integer> vertices = g.vertexSet();
 
-        Map<Integer, Integer> indeg = new HashMap<>();
-        for (Integer v : allVertices) indeg.put(v, 0);
+        while (!vertices.isEmpty()) {
+            Integer nextVertex = null;
 
-        for (Integer v : allVertices) {
-            for (Integer u : g.adjVertexList(v)) {
-                indeg.put(u, indeg.get(u) + 1);
+            // ищем вершину без входящих рёбер
+            for (Integer v : vertices) {
+                boolean hasIncoming = false;
+                for (Integer u : vertices) {
+                    if (!u.equals(v) && g.adjVertexList(u).contains(v)) {
+                        hasIncoming = true;
+                        break;
+                    }
+                }
+                if (!hasIncoming) {
+                    nextVertex = v;
+                    break;
+                }
             }
-        }
 
-        LinkedList<Integer> zeroIn = new LinkedList<>();
-        for (Map.Entry<Integer, Integer> entry : indeg.entrySet()) {
-            if (entry.getValue() == 0) zeroIn.add(entry.getKey());
-        }
-
-        List<Integer> result = new ArrayList<>();
-        while (!zeroIn.isEmpty()) {
-            int current = zeroIn.removeFirst();
-            result.add(current);
-            for (Integer neighbor : g.adjVertexList(current)) {
-                indeg.put(neighbor, indeg.get(neighbor) - 1);
-                if (indeg.get(neighbor) == 0) zeroIn.add(neighbor);
+            if (nextVertex == null) {
+                throw new IllegalArgumentException("Граф содержит цикл");
             }
-        }
 
-        if (result.size() < allVertices.size()) {
-            throw new IllegalArgumentException("Граф содержит цикл, сортировка невозможна");
-        }
+            sorted.add(nextVertex);
 
-        return result;
+            // удаляем все исходящие рёбра
+            List<Integer> neighbors = new ArrayList<>(g.adjVertexList(nextVertex));
+            for (Integer neighbor : neighbors) {
+                g.deleteEdge(nextVertex, neighbor);
+            }
+
+            // удаляем саму вершину
+            g.deleteVertex(nextVertex);
+
+            // обновляем множество вершин
+            vertices = g.vertexSet();
+        }
+        return sorted;
     }
-
-    private static Set<Integer> collectVertices(AdjacencyListGraph g) {
-        Set<Integer> allVertices = new HashSet<>();
-        for (Integer v : g.vertexSet()) {
-            allVertices.add(v);
-            allVertices.addAll(g.adjVertexList(v));
-        }
-        return allVertices;
-    }
-
-
 }

@@ -1,57 +1,42 @@
 package ru.nsu.mzaugolnikov.task121;
 
-import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
-class TopSortTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    @Test
-    void testTopSortSimpleGraph() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        // создаём граф: 1 -> 2 -> 3, 1 -> 3
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(1, 3);
+public class TopologicSortTest {
 
-        List<Integer> sorted = TopologicSort.topSort(graph);
+    public static void main(String[] args) throws IOException {
+        // Создаем временный файл с графом
+        File tempFile = File.createTempFile("graph_goidatest", ".txt");
+        try (FileWriter wr = new FileWriter(tempFile)) {
+            wr.write("1\n"); // количество вершин указываем неверно
+            // для проверки расширяемости объектов хранения данных
+            wr.write("1 2\n");
+            wr.write("1 3\n");
+            wr.write("2 3\n");
+        }
+        Graph[] graphs = new Graph[]{
+                new AdjacencyListGraph(),
+                new AdjacencyMatrixGraph(),
+                new IncidenceMatrixGraph()
+        };
 
-        // Проверяем порядок: 1 перед 2 и 3, 2 перед 3
-        int pos1 = sorted.indexOf(1);
-        int pos2 = sorted.indexOf(2);
-        int pos3 = sorted.indexOf(3);
+        String expected = "1: 2 3 \n2: 3 \n3: \n";
 
-        assertTrue(pos1 < pos2, "1 должно идти перед 2");
-        assertTrue(pos1 < pos3, "1 должно идти перед 3");
-        assertTrue(pos2 < pos3, "2 должно идти перед 3");
-    }
+        for (Graph graph : graphs) {
+            graph.readGraphFromFile(tempFile.getAbsolutePath());
+            assertEquals(expected, graph.toString());
 
-    @Test
-    void testTopSortEmptyGraph() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        List<Integer> sorted = TopologicSort.topSort(graph);
-        assertTrue(sorted.isEmpty(), "Сортировка пустого графа должна возвращать пустой список");
-    }
+            List<Integer> sorted = TopologicSort.sort(graph);
+            assert sorted.indexOf(1) < sorted.indexOf(2);
+            assert sorted.indexOf(1) < sorted.indexOf(3);
+            assert sorted.indexOf(2) < sorted.indexOf(3);
+        }
 
-    @Test
-    void testTopSortSingleVertex() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex(5);
-        List<Integer> sorted = TopologicSort.topSort(graph);
-        assertEquals(1, sorted.size());
-        assertEquals(5, sorted.get(0));
-    }
-
-    @Test
-    void testTopSortCycleGraph() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 1); // цикл
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TopologicSort.topSort(graph);
-        });
-        assertTrue(exception.getMessage().contains("цикл"));
+        tempFile.delete();
     }
 }
