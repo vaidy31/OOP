@@ -243,7 +243,7 @@ public class IncidenceMatrixGraph implements Graph {
                         continue;
                     }
 
-                    int fromVert
+                    int fromVert;
                     int toVert;
                     try {
                         fromVert = Integer.parseInt(verteciesInString[0]);
