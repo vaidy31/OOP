@@ -178,8 +178,7 @@ public class AdjacencyMatrixGraph implements Graph {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(indexToVertex,
-                    vertexMap, Arrays.deepHashCode(graph));
+        return Objects.hash(indexToVertex, vertexMap, Arrays.deepHashCode(graph));
     }
 
     @Override
