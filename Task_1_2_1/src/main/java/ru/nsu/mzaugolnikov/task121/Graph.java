@@ -1,6 +1,5 @@
 package ru.nsu.mzaugolnikov.task121;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -91,8 +90,7 @@ public interface Graph {
                         if (fromVert < 0 || toVert < 0) {
                             System.err.println("Вершина в первой строке представляется в "
                                     + "отрицательном виде, пропускаем...");
-                        }
-                        else {
+                        } else {
                             addEdge(fromVert, toVert);
                         }
                     } catch (NumberFormatException ex) {
