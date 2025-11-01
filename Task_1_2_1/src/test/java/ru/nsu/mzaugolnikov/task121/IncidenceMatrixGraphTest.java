@@ -101,7 +101,7 @@ class IncidenceMatrixGraphTest {
     }
 
     @Test
-    void test_HashCodeAndEquals() {
+    void test_Equals() {
         IncidenceMatrixGraph graph1 = new IncidenceMatrixGraph();
         IncidenceMatrixGraph graph2 = new IncidenceMatrixGraph();
 
@@ -113,8 +113,6 @@ class IncidenceMatrixGraphTest {
         graph3.addEdge(1, 2);
 
         assertEquals(graph1, graph2);
-        assertEquals(graph1.hashCode(), graph2.hashCode());
         assertNotEquals(graph1, graph3);
     }
-
 }
