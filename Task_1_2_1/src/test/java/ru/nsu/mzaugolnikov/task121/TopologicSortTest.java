@@ -4,13 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+
 /**
  * Тест для сортировки алгоритмом Кана.
  */
@@ -84,9 +83,9 @@ public class TopologicSortTest {
             wr.write("2 3c\n");
         }
         Graph[] graphs = new Graph[]{
-                new AdjacencyListGraph(),
-                new AdjacencyMatrixGraph(),
-                new IncidenceMatrixGraph()
+            new AdjacencyListGraph(),
+            new AdjacencyMatrixGraph(),
+            new IncidenceMatrixGraph()
         };
 
         for (Graph graph : graphs) {
