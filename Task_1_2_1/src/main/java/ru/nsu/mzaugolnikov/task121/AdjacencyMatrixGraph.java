@@ -24,6 +24,9 @@ public class AdjacencyMatrixGraph implements Graph {
     /** Сопоставление идентификаторов вершин с индексами в массиве. */
     private final Map<Integer, Integer> vertexMap;
 
+    private static final int HAVE_EDGE = 1;
+    private static final int NO_EDGE = 0;
+
     public AdjacencyMatrixGraph() {
         vertexMap = new HashMap<>();
     }
@@ -72,8 +75,8 @@ public class AdjacencyMatrixGraph implements Graph {
         }
 
         for (int i = 0; i < graph.length; i++) {
-            graph[lastIndex][i] = 0;
-            graph[i][lastIndex] = 0;
+            graph[lastIndex][i] = NO_EDGE;
+            graph[i][lastIndex] = NO_EDGE;
         }
         indexToVertex.remove(lastIndex);
     }
@@ -100,7 +103,7 @@ public class AdjacencyMatrixGraph implements Graph {
             toIndex = vertexMap.get(to);
             count++;
         }
-        graph[fromIndex][toIndex] = 1;
+        graph[fromIndex][toIndex] = HAVE_EDGE;
         return count;
     }
 
@@ -117,7 +120,7 @@ public class AdjacencyMatrixGraph implements Graph {
         if (fromIndex == null || toIndex == null) {
             return;
         }
-        graph[fromIndex][toIndex] = 0;
+        graph[fromIndex][toIndex] = NO_EDGE;
     }
 
     /**
@@ -136,91 +139,11 @@ public class AdjacencyMatrixGraph implements Graph {
 
         for (int i = 0; i < indexToVertex.size(); i++) {
             Integer u = indexToVertex.get(i);
-            if (u != null && graph[index][i] != 0) {
+            if (u != null && graph[index][i] != NO_EDGE) {
                 neighbors.add(u);
             }
         }
         return neighbors;
-    }
-
-    /**
-     * Читает граф из файла.
-     *
-     * @param file путь к файлу
-     * @throws IOException при ошибках чтения
-     */
-    @Override
-    public void readGraphFromFile(String file) throws IOException {
-        File newFile = new File(file);
-        FileReader fr = new FileReader(newFile);
-        String line;
-
-
-        int countVertexGlobal = 0;
-        int countVertexLocal = 0;
-        int numString = 0;
-
-        try (BufferedReader readerString = new BufferedReader(fr)) {
-            String initLine = readerString.readLine();
-            // основываясь на соглашении, что
-            // первая строка содержит количество вершин
-            // Проверяем, указано ли число вершин в первой строке
-            try {
-                countVertexGlobal = Integer.parseInt(initLine);
-            } catch (NumberFormatException e) {
-                System.out.println("Первая строка не содержит число вершин — "
-                        + "граф строится по факту появления вершин из ребер.");
-                countVertexGlobal = 0;
-
-                // Добавляем обработку этой строки как ребра:
-                String[] verteciesInString = initLine.split("\\s+");
-                if (verteciesInString.length == 2) {
-                    try {
-                        int fromVert = Integer.parseInt(verteciesInString[0]);
-                        int toVert = Integer.parseInt(verteciesInString[1]);
-                        addEdge(fromVert, toVert);
-                    } catch (NumberFormatException ex) {
-                        System.err.println("Ошибка формата в первой строке.");
-                    }
-                }
-            }
-
-
-            while ((line = readerString.readLine()) != null) {
-                String[] verteciesInString = line.split("\\s+");
-                numString++;
-
-                if (verteciesInString.length != 2) {
-                    System.err.println("Нестандартное количество вершин в строке " + numString);
-                    continue;
-                }
-
-                int fromVert;
-                int toVert;
-                try {
-                    fromVert = Integer.parseInt(verteciesInString[0]);
-                    toVert = Integer.parseInt(verteciesInString[1]);
-                } catch (NumberFormatException e) {
-                    System.err.println("Проблема формата в строке " + numString);
-                    continue;
-                }
-
-                if (fromVert < 0 || toVert < 0) {
-                    System.err.println("Нестандартный номер вершины в строке "
-                            + numString + "пропускаем...");
-                    continue;
-                }
-
-                countVertexLocal += addEdge(fromVert, toVert);
-            }
-
-            if (countVertexLocal > countVertexGlobal && countVertexGlobal > 0) {
-                System.out.println("Количество вершин в начале файле было"
-                        + "указано неверно, размеры были увеличены");
-            }
-        } catch (NumberFormatException e) {
-            System.err.println("Проблема формата в строке " + numString);
-        }
     }
 
     /**
@@ -239,7 +162,7 @@ public class AdjacencyMatrixGraph implements Graph {
             sb.append(v).append(": ");
             for (int j = 0; j < indexToVertex.size(); j++) {
                 Integer u = indexToVertex.get(j);
-                if (u != null && graph[i][j] != 0) {
+                if (u != null && graph[i][j] != NO_EDGE) {
                     sb.append(u).append(" ");
                 }
             }

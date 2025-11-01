@@ -17,9 +17,12 @@ import java.util.Set;
  */
 public class IncidenceMatrixGraph implements Graph {
     private int[][] matrix; // матрица индцедентности 1 ребро 0 нет
-    Map<Integer, Integer> vertexMapForIndex; // вершина в индекс строки матрицы
+    private Map<Integer, Integer> vertexMapForIndex; // вершина в индекс строки матрицы
     private int countVertexGlobal; // количество вершин
     private List<Edge> edges = new ArrayList<>(); // для ребер
+
+    private static final int HAVE_EDGE = 1;
+    private static final int NO_EDGE = 0;
 
     private static class Edge {
         int from;
@@ -148,8 +151,8 @@ public class IncidenceMatrixGraph implements Graph {
         }
         int fromIndex = vertexMapForIndex.get(from);
         int toIndex = vertexMapForIndex.get(to);
-        newMatrix[fromIndex][newCols - 1] = -1;
-        newMatrix[toIndex][newCols - 1] = 1;
+        newMatrix[fromIndex][newCols - 1] = NO_EDGE;
+        newMatrix[toIndex][newCols - 1] = HAVE_EDGE;
 
         matrix = newMatrix;
         edges.add(new Edge(from, to));
@@ -206,76 +209,6 @@ public class IncidenceMatrixGraph implements Graph {
         return neighbors;
     }
 
-
-    /**
-     * Читает граф из файла.
-     *
-     * @param file путь к файлу
-     * @throws IOException при ошибках чтения
-     */
-    @Override
-    public void readGraphFromFile(String file) throws IOException {
-        File newFile = new File(file);
-        FileReader fr = new FileReader(newFile);
-        String line;
-
-
-        int countVertexGlobal = 0;
-        int countVertexLocal = 0;
-        int numString = 0;
-
-        try (BufferedReader readerString = new BufferedReader(fr)) {
-            String initLine = readerString.readLine();
-            // основываясь на соглашении, что
-            // первая строка содержит количество вершин
-            // Проверяем, указано ли число вершин в первой строке
-            try {
-                int declaredVertexCount = Integer.parseInt(initLine);
-                updateCapacity(declaredVertexCount);
-
-                while ((line = readerString.readLine()) != null) {
-                    String[] verteciesInString = line.split("\\s+");
-                    numString++;
-
-                    if (verteciesInString.length != 2) {
-                        System.err.println("Нестандартное количество вершин в строке "
-                                + numString);
-                        continue;
-                    }
-
-                    int fromVert;
-                    int toVert;
-                    try {
-                        fromVert = Integer.parseInt(verteciesInString[0]);
-                        toVert = Integer.parseInt(verteciesInString[1]);
-                    } catch (NumberFormatException e) {
-                        System.err.println("Проблема формата в строке "
-                                + numString);
-                        continue;
-                    }
-
-                    if (fromVert < 0 || toVert < 0) {
-                        System.err.println("Нестандартный номер вершины в строке "
-                                + numString + "пропускаем...");
-                        continue;
-                    }
-
-                    addEdge(fromVert, toVert);
-                }
-
-                if (this.countVertexGlobal > declaredVertexCount) {
-                    System.out.println("Количество вершин в начале файле было"
-                            + "указано неверно, размеры были увеличены");
-                }
-
-            } catch (NumberFormatException e) {
-                System.err.println("Первая строка не содержит число вершин —"
-                        + "граф строится по факту появления вершин из ребер.");
-            }
-
-        }
-    }
-
     /**
      * Возвращает строковое представление графа.
      *
@@ -328,5 +261,4 @@ public class IncidenceMatrixGraph implements Graph {
     public Set<Integer> vertexSet() {
         return new HashSet<>(vertexMapForIndex.keySet());
     }
-
 }

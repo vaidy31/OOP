@@ -21,7 +21,6 @@ public class AdjacencyListGraph implements Graph {
     private Map<Integer, List<Integer>> adjList = new HashMap<>();
     /** Множество всех вершин. */
     private Set<Integer> vertexSet = new HashSet<>();
-    /** Общее количество вершин в графе. */
 
     @Override
     public void addVertex(Integer v) {
@@ -48,14 +47,20 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public int addEdge(int from, int to) {
-        addVertex(from);
-        addVertex(to);
+        int count = 0;
+        if (!vertexSet.contains(from)) {
+            addVertex(from);
+            count++;
+        }
+        if (!vertexSet.contains(to)) {
+            addVertex(to);
+            count++;
+        }
         List<Integer> neighbors = adjList.get(from);
         if (!neighbors.contains(to)) {
             neighbors.add(to);
-            return 1;
         }
-        return 0;
+        return count;
     }
 
 
@@ -64,87 +69,6 @@ public class AdjacencyListGraph implements Graph {
         if (adjList.containsKey(from)) {
             List<Integer> neighbors = adjList.get(from);
             neighbors.remove(Integer.valueOf(to));
-        }
-    }
-
-
-    /**
-     * Читает граф из файла.
-     *
-     * @param file файл
-     * @throws IOException при ошибках чтения
-     */
-    @Override
-    public void readGraphFromFile(String file) throws IOException {
-        File newFile = new File(file);
-        FileReader fr = new FileReader(newFile);
-        String line;
-
-
-        int countVertexGlobal = 0;
-        int countVertexLocal = 0;
-        int numString = 0;
-
-
-        try (BufferedReader readerString = new BufferedReader(fr)) {
-            String initLine = readerString.readLine();
-            // основываясь на соглашении, что
-            // первая строка содержит количество вершин
-
-            // Указано ли число вершин в первой строке
-            try {
-                countVertexGlobal = Integer.parseInt(initLine);
-            } catch (NumberFormatException e) {
-                System.out.println("Первая строка не содержит число вершин —"
-                        + "граф строится по факту появления вершин из ребер.");
-                countVertexGlobal = 0;
-
-                String[] verteciesInString = initLine.split("\\s+");
-                if (verteciesInString.length == 2) {
-                    try {
-                        int fromVert = Integer.parseInt(verteciesInString[0]);
-                        int toVert = Integer.parseInt(verteciesInString[1]);
-                        addEdge(fromVert, toVert);
-                    } catch (NumberFormatException ex) {
-                        System.err.println("Ошибка формата в первой строке.");
-                    }
-                }
-            }
-            while ((line = readerString.readLine()) != null) {
-                String[] verteciesInString = line.split("\\s+");
-                numString++;
-
-                if (verteciesInString.length != 2) {
-                    System.err.println("Нестандартное количество вершин в строке "
-                            + numString);
-                    continue;
-                }
-
-                int fromVert;
-                int toVert;
-                try {
-                    fromVert = Integer.parseInt(verteciesInString[0]);
-                    toVert = Integer.parseInt(verteciesInString[1]);
-                } catch (NumberFormatException e) {
-                    System.err.println("Проблема формата в строке " + numString);
-                    continue;
-                }
-
-                if (fromVert < 0 || toVert < 0) {
-                    System.err.println("Нестандартный номер вершины в строке "
-                            + numString + "пропускаем...");
-                    continue;
-                }
-
-                addEdge(fromVert, toVert);
-            }
-
-            if (vertexSet.size() > countVertexGlobal) {
-                System.out.println("Количество вершин в начале файле было указано неверно,"
-                        + "размеры были увеличены");
-            }
-        } catch (NumberFormatException e) {
-            System.err.println("Проблема формата в строке " + numString);
         }
     }
 

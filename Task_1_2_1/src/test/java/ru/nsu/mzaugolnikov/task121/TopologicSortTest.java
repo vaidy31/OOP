@@ -1,11 +1,14 @@
 package ru.nsu.mzaugolnikov.task121;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -42,6 +45,30 @@ public class TopologicSortTest {
             assert sorted.indexOf(2) < sorted.indexOf(3);
         }
 
+        tempFile.delete();
+    }
+
+    @Test
+    void testTopologicSortWithCycle() throws IOException {
+        // Создаем временный файл с графом
+        File tempFile = File.createTempFile("graph_goidatest", ".txt");
+        try (FileWriter wr = new FileWriter(tempFile)) {
+            wr.write("1\n"); // количество вершин указываем неверно
+            // для проверки расширяемости объектов хранения данных
+            wr.write("1 2\n");
+            wr.write("2 3\n");
+            wr.write("3 1\n");
+        }
+        Graph[] graphs = new Graph[]{
+            new AdjacencyListGraph(),
+            new AdjacencyMatrixGraph(),
+            new IncidenceMatrixGraph()
+        };
+
+        for (Graph graph : graphs) {
+            graph.readGraphFromFile(tempFile.getAbsolutePath());
+            assertThrows(IllegalArgumentException.class, () -> TopologicSort.sort(graph));
+        }
         tempFile.delete();
     }
 }
