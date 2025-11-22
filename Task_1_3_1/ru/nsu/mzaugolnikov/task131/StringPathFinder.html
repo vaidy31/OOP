@@ -156,7 +156,7 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - файл</dd>
 <dt>Returns:</dt>
-<dd>true/false</dd>
+<dd>true, если файл существует и доступен; false иначе</dd>
 </dl>
 </section>
 </li>
@@ -173,9 +173,9 @@ loadScripts(document, 'script');</script>
 <dd><code>fileName</code> - имя файла</dd>
 <dd><code>pattern</code> - паттерн</dd>
 <dt>Returns:</dt>
-<dd>список с символами, если есть</dd>
+<dd>список индексов всех найденных вхождений</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - исключение при открытии файла</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - если произошла ошибка при чтении файла</dd>
 </dl>
 </section>
 </li>
