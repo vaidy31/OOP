@@ -269,12 +269,12 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
         private int indexOfChumBucket;
         private Node<K, V> currNode;
         private HashTable<K, V> sameTable;
-        private final int ModCountIter;
+        private final int modCountIter;
 
         public Iterator(HashTable<K,V> table) {
             this.indexOfChumBucket = 0;
             this.sameTable = table;
-            this.ModCountIter = table.modCount;
+            this.modCountIter = table.modCount;
 
             while (indexOfChumBucket < table.capacity
                     && table.hashTableObj[indexOfChumBucket] == null) {
@@ -292,7 +292,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
         }
 
         public Node<K, V> next() {
-            if (ModCountIter != sameTable.modCount) {
+            if (modCountIter != sameTable.modCount) {
                 throw new ConcurrentModificationException();
             }
             if (currNode == null) {
