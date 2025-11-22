@@ -102,7 +102,8 @@ class StringPathFinderTest {
         return filePath.toFile();
     }
 
-    private File createBigFile(Path dir, String name, long sizeBytes, String content) throws IOException {
+    private File createBigFile(Path dir, String name,
+                               long sizeBytes, String content) throws IOException {
         Path filePath = dir.resolve(name);
         try (java.io.OutputStream os = Files.newOutputStream(filePath);
              java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream(os)) {
