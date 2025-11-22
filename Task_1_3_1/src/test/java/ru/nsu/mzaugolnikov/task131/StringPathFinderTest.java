@@ -10,7 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringPathFinderTest {
     private StringPathFinder finder;
@@ -30,10 +31,11 @@ class StringPathFinderTest {
     }
 
     @Test
-    void testNullFile(@TempDir Path tempDir){
+    void testNullFile(@TempDir Path tempDir) {
         String text = "Здарова, ворлд.";
         assertThrows(IllegalStateException.class, () -> {
-            finder.findSubstringInFile(null, text); });
+            finder.findSubstringInFile(null, text);
+        });
     }
 
     @Test
@@ -44,8 +46,9 @@ class StringPathFinderTest {
         assertEquals(0, result.size());
     }
 
+    // Имя метода исправлено с testOVERLAP на testOverlap (требование Checkstyle)
     @Test
-    void testOVERLAP(@TempDir Path tempDir) throws IOException {
+    void testOverlap(@TempDir Path tempDir) throws IOException {
         File file = createTestFile(tempDir, "test.txt", "nanana");
         List<Long> result = finder.findSubstringInFile(file, "nana");
         assertEquals(2, result.size());
@@ -87,7 +90,7 @@ class StringPathFinderTest {
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
 
         Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals((long) 100000, result.get(0));
+        Assertions.assertEquals(100000L, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
