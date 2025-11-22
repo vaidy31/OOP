@@ -1,18 +1,21 @@
 package ru.nsu.mzaugolnikov.task131;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+/**
+ * Тесты для поиска подстроки.
+ */
 class StringPathFinderTest {
     private StringPathFinder finder;
 
@@ -89,8 +92,8 @@ class StringPathFinderTest {
         File file = createTestFile(tempDir, "soso.txt", content);
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
 
-        Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals(100000L, result.get(0));
+        assertEquals(1, result.size());
+        assertEquals(100000L, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
