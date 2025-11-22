@@ -163,7 +163,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * Обновляет значение по ключу. Возвращает boolean.
+     * Обновляет значение по ключу. Возвращает booleasn.
      *
      * @param key ключ
      * @param value значение

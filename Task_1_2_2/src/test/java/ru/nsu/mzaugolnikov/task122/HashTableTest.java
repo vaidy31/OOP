@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ConcurrentModificationException;
 
 /**
- * Тесты для того чтобы все было надежно.
+ * Тесты для того чтобы все было надежнdо.
  */
 class HashTableTest {
 
