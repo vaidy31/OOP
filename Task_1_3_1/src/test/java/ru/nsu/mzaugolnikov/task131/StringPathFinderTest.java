@@ -93,7 +93,7 @@ class StringPathFinderTest {
 
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
         assertEquals(1, result.size());
-        assertEquals(17179869165L, result.get(0));
+        assertEquals(targetPos, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
@@ -113,7 +113,7 @@ class StringPathFinderTest {
             // дл строки для поиска
             long patternLength = content.length();
             // сколько до нужной строки
-            long dataBeforePattern = sizeBytes - patternLength;
+            long dataBeforePattern = sizeBytes;
             // заполняем до нужного места
             for (long written = 0; written < dataBeforePattern; written += chunk.length) {
                 long remaining = dataBeforePattern - written;
