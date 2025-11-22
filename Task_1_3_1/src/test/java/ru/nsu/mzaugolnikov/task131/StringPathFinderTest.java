@@ -86,14 +86,14 @@ class StringPathFinderTest {
     void testLargeFileAndOffset(@TempDir Path tempDir) throws IOException {
         final String targetPattern = "GOIDAWORD";
 
-        final long gigaChadSize = 2L * 1024 * 1024 * 1024;
+        final long gigaChadSize = 36L * 1024 * 1024 * 1024;
         final long targetPos = gigaChadSize - 10;
 
         File file = createBigFile(tempDir, "huge.txt", targetPos, targetPattern);
 
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
         assertEquals(1, result.size());
-        assertEquals(2147483629L, result.get(0));
+        assertEquals(38654705645L, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
