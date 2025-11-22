@@ -279,6 +279,11 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
         private final HashTable<K, V> sameTable;
         private final int modCountIter;
 
+        /**
+         * Конструктор итератора.
+         *
+         * @param table таблица для итерации
+         */
         public Iterator(HashTable<K, V> table) {
             this.indexOfChumBucket = 0;
             this.sameTable = table;
