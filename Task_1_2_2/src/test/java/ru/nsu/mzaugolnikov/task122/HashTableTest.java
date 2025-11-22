@@ -1,7 +1,6 @@
 package ru.nsu.mzaugolnikov.task122;
 
 import java.util.ConcurrentModificationException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
