@@ -11,12 +11,12 @@ import java.util.Objects;
  * @param <V> любое значение
  */
 public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
+
     private Node<K, V>[] hashTableObj;
     private final double resizeRatio = 0.8;
     private int size;
     private int capacity = 16;
     private int modCount = 0;
-
 
     @SuppressWarnings("unchecked")
     public HashTable() {
@@ -53,12 +53,13 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     /**
      * Конструктор для итератора.
      *
-     * @return возвращает Итератор для внутренней таблицы класса
+     * @return Итератор для внутренней таблицы класса
      */
     @Override
     public Iterator iterator() {
         return new Iterator(this);
     }
+
     /**
      * Рассчитывает хэш для ключа.
      *
@@ -94,19 +95,22 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     public void put(K key, V value) {
         int hash = hashForKey(key);
         int index = indexForKey(hash);
-        if ((double)size / capacity >= resizeRatio) {
+
+        if ((double) size / capacity >= resizeRatio) {
             resizeTable();
             index = indexForKey(hash);
         }
+
         Node<K, V> temp = hashTableObj[index];
         while (temp != null) {
-            if (Objects.equals(temp.key, key)) { // сравниваем ссылки
+            if (Objects.equals(temp.key, key)) {
                 temp.value = value;
                 return;
             }
             temp = temp.next;
         }
-        Node<K,V> newNode = new Node<>(key, value);
+
+        Node<K, V> newNode = new Node<>(key, value);
         newNode.next = hashTableObj[index];
         hashTableObj[index] = newNode;
         size++;
@@ -117,14 +121,13 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
      * Возвращает значение по ключу.
      *
      * @param key ключ
-     * @return value который находится по ключу key
+     * @return значение по ключу
      */
     public V get(K key) {
         int keyToFind = hashForKey(key);
         int indexToFind = indexForKey(keyToFind);
 
         Node<K, V> temp = hashTableObj[indexToFind];
-
         while (temp != null) {
             if (Objects.equals(temp.key, key)) {
                 return temp.value;
@@ -138,7 +141,6 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
      * Удаление.
      *
      * @param key ключ
-     * @return value/null
      */
     public void remove(K key) {
         int keyToFind = hashForKey(key);
@@ -146,6 +148,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
 
         Node<K, V> temp = hashTableObj[indexToFind];
         Node<K, V> prev = null;
+
         while (temp != null) {
             if (Objects.equals(temp.key, key)) {
                 if (prev == null) {
@@ -163,11 +166,11 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * Обновляет значение по ключу. Возвращает booleasn.
+     * Обновляет значение по ключу. Возвращает boolean.
      *
      * @param key ключ
      * @param value значение
-     * @return true/false
+     * @return true, если ключ найден, иначе false
      */
     public boolean update(K key, V value) {
         int keyToFind = hashForKey(key);
@@ -185,15 +188,16 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * Увеличивает по-крестьянски таблицу, когда необходимо.
+     * Увеличивает таблицу вдвое при необходимости.
      */
     public void resizeTable() {
         int newCapacity = capacity * 2;
         Node<K, V>[] hashTableObjNew = (Node<K, V>[]) new Node[newCapacity];
+
         for (int i = 0; i < capacity; i++) {
             Node<K, V> temp = hashTableObj[i];
             while (temp != null) {
-                Node<K,V> next = temp.next;
+                Node<K, V> next = temp.next;
                 int newIndex = reHash(temp.key, newCapacity);
                 temp.next = hashTableObjNew[newIndex];
                 hashTableObjNew[newIndex] = temp;
@@ -206,11 +210,12 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * Метод для сравнения хэш таблиц друг с другом.
+     * Сравнивает две хэш-таблицы.
      *
-     * @param obj   the reference object with which to compare.
-     * @return true/false
+     * @param obj объект для сравнения
+     * @return true, если равны, иначе false
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -218,10 +223,12 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
         if (!(obj instanceof HashTable<?, ?>)) {
             return false;
         }
+
         HashTable<K, ?> otherTable = (HashTable<K, ?>) obj;
         if (this.size != otherTable.size) {
             return false;
         }
+
         HashTable<K, V>.Iterator it = this.iterator();
         while (it.hasNext()) {
             Node<K, V> node = it.next();
@@ -233,16 +240,18 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * to_string для хэштаблицы.
+     * Строковое представление таблицы.
      *
-     * @return вывод таблицы
+     * @return таблица в виде строки
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
         boolean first = true;
         for (Node<K, V> n : this) {
-            if (!first) sb.append(", ");
+            if (!first) {
+                sb.append(", ");
+            }
             sb.append(n.key).append("=").append(n.value);
             first = false;
         }
@@ -251,27 +260,31 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
     }
 
     /**
-     * Проверяет, есть ли ключ в таблице.
+     * Проверяет наличие ключа.
      *
      * @param key ключ для поиска
-     * @return true/false
+     * @return true, если ключ найден
      */
     public boolean containsKey(K key) {
         return get(key) != null;
     }
 
     /**
-     * Класс Итератора для перебора всех Нод, которые есть в цепочке
-     * и в таблице в целом.
-     * Используется для более удобной работы toString, equals, is
+     * Итератор по всем нодам таблицы.
      */
-    public class Iterator implements java.util.Iterator<Node<K,V>> {
+    public class Iterator implements java.util.Iterator<Node<K, V>> {
+
         private int indexOfChumBucket;
         private Node<K, V> currNode;
-        private HashTable<K, V> sameTable;
+        private final HashTable<K, V> sameTable;
         private final int modCountIter;
 
-        public Iterator(HashTable<K,V> table) {
+        /**
+         * Конструктор итератора.
+         *
+         * @param table таблица для итерации
+         */
+        public Iterator(HashTable<K, V> table) {
             this.indexOfChumBucket = 0;
             this.sameTable = table;
             this.modCountIter = table.modCount;
@@ -280,17 +293,18 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
                     && table.hashTableObj[indexOfChumBucket] == null) {
                 indexOfChumBucket++;
             }
-            if (indexOfChumBucket < table.capacity) {
-                currNode = table.hashTableObj[indexOfChumBucket];
-            } else {
-                currNode = null;
-            }
+
+            currNode = (indexOfChumBucket < table.capacity)
+                    ? table.hashTableObj[indexOfChumBucket]
+                    : null;
         }
 
+        @Override
         public boolean hasNext() {
             return currNode != null;
         }
 
+        @Override
         public Node<K, V> next() {
             if (modCountIter != sameTable.modCount) {
                 throw new ConcurrentModificationException();
@@ -298,24 +312,23 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
             if (currNode == null) {
                 throw new NoSuchElementException();
             }
+
             Node<K, V> res = currNode;
 
             if (currNode.next != null) {
                 currNode = currNode.next;
-            }
-            else {
+            } else {
                 indexOfChumBucket++;
-                while (indexOfChumBucket < sameTable.capacity &&
-                        sameTable.hashTableObj[indexOfChumBucket] == null) {
+                while (indexOfChumBucket < sameTable.capacity
+                        && sameTable.hashTableObj[indexOfChumBucket] == null) {
                     indexOfChumBucket++;
                 }
-                if (indexOfChumBucket < sameTable.capacity) {
-                    currNode = sameTable.hashTableObj[indexOfChumBucket];
-                } else {
-                    currNode = null;
-                }
+                currNode = (indexOfChumBucket < sameTable.capacity)
+                        ? sameTable.hashTableObj[indexOfChumBucket]
+                        : null;
             }
-        return res;
+
+            return res;
         }
     }
 }

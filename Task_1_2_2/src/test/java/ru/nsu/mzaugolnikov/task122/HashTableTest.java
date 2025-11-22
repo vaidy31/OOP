@@ -1,19 +1,19 @@
 package ru.nsu.mzaugolnikov.task122;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ConcurrentModificationException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
- * Тесты для того чтобы все было надежнdо.
+ * Тесты для того чтобы все было надежно.
  */
 class HashTableTest {
 
@@ -115,7 +115,7 @@ class HashTableTest {
         }
 
         for (int i = 0; i < 20; i++) {
-            assertEquals(i,table.get("kluch`" + i));
+            assertEquals(i, table.get("kluch`" + i));
         }
 
         assertEquals(20, table.size());
