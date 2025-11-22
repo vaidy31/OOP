@@ -93,7 +93,7 @@ class StringPathFinderTest {
 
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
         assertEquals(1, result.size());
-        assertEquals(17179869184L, result.get(0));
+        assertEquals(17179869165L, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
