@@ -85,20 +85,50 @@ class StringPathFinderTest {
     @Test
     void testLargeFileAndOffset(@TempDir Path tempDir) throws IOException {
         final String targetPattern = "GOIDAWORD";
-        String temp1 = "X".repeat(100000);
-        String temp2 = "Y".repeat(100000);
 
-        String content = temp1 + targetPattern + temp2;
-        File file = createTestFile(tempDir, "soso.txt", content);
+        final long gigaChadSize = 2L * 1024 * 1024 * 1024;
+        final long targetPos = gigaChadSize - 10;
+
+        File file = createBigFile(tempDir, "huge.txt", targetPos, targetPattern);
+
         List<Long> result = finder.findSubstringInFile(file, targetPattern);
-
         assertEquals(1, result.size());
-        assertEquals(100000L, result.get(0));
+        assertEquals(2147483629L, result.get(0));
     }
 
     private File createTestFile(Path dir, String name, String content) throws IOException {
         Path filePath = dir.resolve(name);
         Files.write(filePath, content.getBytes(StandardCharsets.UTF_8));
+        return filePath.toFile();
+    }
+
+    private File createBigFile(Path dir, String name, long sizeBytes, String content) throws IOException {
+        Path filePath = dir.resolve(name);
+        try (java.io.OutputStream os = Files.newOutputStream(filePath);
+             java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream(os)) {
+            // пишем по 1мб
+            byte[] chunk = "X".repeat(1024 * 1024).getBytes(StandardCharsets.UTF_8);
+
+            // дл строки для поиска
+            long patternLength = content.length();
+            // сколько до нужной строки
+            long dataBeforePattern = sizeBytes - patternLength;
+            // заполняем до нужного места
+            for (long written = 0; written < dataBeforePattern; written += chunk.length) {
+                long remaining = dataBeforePattern - written;
+
+                // если достаточно, вписываем еще
+                if (remaining >= chunk.length) {
+                    bos.write(chunk);
+                } else {
+                    // оставшаяся часть
+                    bos.write(chunk, 0, (int) remaining);
+                }
+            }
+
+            // запись искомой подстроки
+            bos.write(content.getBytes(StandardCharsets.UTF_8));
+        }
         return filePath.toFile();
     }
 }

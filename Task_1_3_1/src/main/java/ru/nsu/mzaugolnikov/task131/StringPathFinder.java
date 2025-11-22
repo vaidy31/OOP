@@ -24,7 +24,7 @@ public class StringPathFinder {
      * @param fileName файл
      * @return true, если файл существует и доступен; false иначе
      */
-    public boolean startForFileFuncs(File fileName) {
+    private boolean startForFileFuncs(File fileName) {
         if (fileName == null || !fileName.exists()) {
             return false;
         }
