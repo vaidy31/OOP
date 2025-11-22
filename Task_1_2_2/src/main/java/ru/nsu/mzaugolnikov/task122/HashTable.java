@@ -284,8 +284,8 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
             this.sameTable = table;
             this.modCountIter = table.modCount;
 
-            while (indexOfChumBucket < table.capacity &&
-                    table.hashTableObj[indexOfChumBucket] == null) {
+            while (indexOfChumBucket < table.capacity
+                    && table.hashTableObj[indexOfChumBucket] == null) {
                 indexOfChumBucket++;
             }
 
@@ -314,8 +314,8 @@ public class HashTable<K, V> implements Iterable<HashTable.Node<K, V>> {
                 currNode = currNode.next;
             } else {
                 indexOfChumBucket++;
-                while (indexOfChumBucket < sameTable.capacity &&
-                        sameTable.hashTableObj[indexOfChumBucket] == null) {
+                while (indexOfChumBucket < sameTable.capacity
+                        && sameTable.hashTableObj[indexOfChumBucket] == null) {
                     indexOfChumBucket++;
                 }
                 currNode = (indexOfChumBucket < sameTable.capacity)
